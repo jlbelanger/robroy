@@ -16,6 +16,45 @@
 	z-index: $robroy-z-index;
 }
 
+.robroy-fade-in {
+	animation: robroy-fade-in $robroy-fade-in-duration forwards ease-in-out;
+	opacity: 0;
+
+	@media (prefers-reduced-motion) {
+		animation: none;
+		opacity: 1;
+	}
+}
+
+@keyframes robroy-fade-in {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.robroy-fade-out {
+	animation: robroy-fade-out $robroy-fade-out-duration forwards ease-in-out;
+	opacity: 1;
+
+	@media (prefers-reduced-motion) {
+		animation: none;
+	}
+}
+
+@keyframes robroy-fade-out {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
 .robroy__figure {
 	position: relative;
 	z-index: $robroy-figure-z-index;

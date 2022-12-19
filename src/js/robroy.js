@@ -25,6 +25,8 @@ const Robroy = {
 		args.hideOverlay = args.hideOverlay || false;
 		args.disableAltCaptions = args.disableAltCaptions || false;
 		args.imgLoadIntervalMilliseconds = args.imgLoadIntervalMilliseconds || 250;
+		args.animateInClass = args.animateInClass || 'robroy-fade-in';
+		args.animateOutClass = args.animateOutClass || 'robroy-fade-out';
 		Robroy.args = args;
 
 		const lang = args.lang || {};
@@ -116,6 +118,15 @@ const Robroy = {
 		const $figcaption = $container.querySelector('.robroy__caption');
 		Robroy.setSize($img, $figcaption);
 	},
+	getAnimationDuration: (elem) => {
+		let animationDuration = getComputedStyle(elem).animationDuration;
+		if (animationDuration.includes('ms')) {
+			animationDuration = parseFloat(animationDuration.replace('ms', ''));
+		} else if (animationDuration.includes('s')) {
+			animationDuration = parseFloat(animationDuration.replace('s', '')) * 1000;
+		}
+		return animationDuration;
+	},
 	open: ($thumbnail) => {
 		// Disallow multiple open lightboxes.
 		if (document.getElementById(Robroy.args.id)) {
@@ -131,7 +142,7 @@ const Robroy = {
 		}
 
 		const $container = document.createElement('div');
-		$container.setAttribute('class', 'robroy');
+		$container.setAttribute('class', `robroy ${Robroy.args.animateInClass}`.trim());
 		$container.setAttribute('id', Robroy.args.id);
 		$container.setAttribute('tabindex', '-1');
 		document.body.appendChild($container);
@@ -192,19 +203,35 @@ const Robroy = {
 		}
 
 		Robroy.setImage($thumbnail);
+
+		// Animate in.
+		if (Robroy.args.animateInClass) {
+			const duration = Robroy.getAnimationDuration($container);
+			setTimeout(() => {
+				$container.classList.remove(Robroy.args.animateInClass);
+			}, duration + 100);
+		}
 	},
 	close: () => {
 		if (Robroy.args.bodyClass) {
 			document.body.classList.remove('robroy-open');
 		}
 
-		// Remove the lightbox.
-		const $container = document.getElementById(Robroy.args.id);
-		$container.remove();
-
 		// Return focus to the previously focused element.
 		Robroy.activeElement.focus();
 		Robroy.activeElement = null;
+
+		// Animate out.
+		const $container = document.getElementById(Robroy.args.id);
+		if (Robroy.args.animateOutClass) {
+			$container.classList.add(Robroy.args.animateOutClass);
+			const duration = Robroy.getAnimationDuration($container);
+			setTimeout(() => {
+				$container.remove();
+			}, duration + 100);
+		} else {
+			$container.remove();
+		}
 	},
 	next: () => {
 		// Do not allow going past the last image.
