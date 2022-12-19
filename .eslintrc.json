@@ -1,0 +1,28 @@
+{
+	"extends": "airbnb-base",
+	"env": {
+		"browser": true,
+		"jest": true
+	},
+	"globals": {
+		"after": "readonly",
+		"before": "readonly",
+		"cy": "readonly",
+		"Cypress": "readonly"
+	},
+	"rules": {
+		"comma-dangle": ["error", {
+			"arrays": "always-multiline",
+			"objects": "always-multiline",
+			"imports": "always-multiline",
+			"exports": "always-multiline",
+			"functions": "never"
+		}],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"max-len": ["error", { "code": 150 }],
+		"no-tabs": 0,
+		"no-use-before-define": 0,
+		"no-param-reassign": 0,
+		"prefer-destructuring": 0
+	}
+}

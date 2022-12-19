@@ -1,0 +1,32 @@
+$robroy-black: #000 !default;
+$robroy-white: #fff !default;
+
+$robroy-arrow-color: $robroy-white !default;
+$robroy-arrow-size: 10px !default;
+
+$robroy-button-background-color: transparent !default;
+
+$robroy-caption-color: $robroy-white !default;
+$robroy-caption-font-size: 16px !default;
+$robroy-caption-line-height: 1.4 !default;
+$robroy-caption-margin-top: 4px !default;
+$robroy-caption-min-width: 300px !default;
+
+$robroy-close-color: $robroy-white !default;
+$robroy-close-content: '\00d7' !default;
+$robroy-close-font-family: serif !default;
+$robroy-close-font-size: 32px !default;
+$robroy-close-font-weight: bold !default;
+
+$robroy-icon-size: 44px !default;
+
+$robroy-loading-color: $robroy-white !default;
+$robroy-loading-duration: 2s !default;
+$robroy-loading-size: 32px !default;
+$robroy-loading-width: 6px !default;
+
+$robroy-overlay-background: rgba($robroy-black, .8) !default;
+
+$robroy-figure-z-index: 9998 !default;
+$robroy-z-index: 9997 !default;
+$robroy-loading-z-index: 9995 !default;

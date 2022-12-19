@@ -1,0 +1,40 @@
+{
+	"name": "@jlbelanger/robroy",
+	"version": "1.0.0",
+	"description": "Lightbox.",
+	"license": "GPL-3.0-only",
+	"author": {
+		"name": "Jenny Belanger",
+		"email": "mail@jennybelanger.com",
+		"url": "https://www.jennybelanger.com/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jlbelanger/robroy.git"
+	},
+	"scripts": {
+		"build": "node_modules/.bin/webpack --config webpack.config.js",
+		"lint": "yarn lint:css && yarn lint:js",
+		"lint:css": "node_modules/.bin/stylelint 'src/scss/**/*.scss'",
+		"lint:js": "node_modules/.bin/eslint . --ext .js",
+		"watch": "node_modules/.bin/webpack --config webpack-dev.config.js"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@babel/core": "^7.20.5",
+		"babel-loader": "^9.1.0",
+		"css-loader": "^6.7.3",
+		"eslint": "^8.5.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-plugin-import": "^2.25.3",
+		"mini-css-extract-plugin": "^2.7.2",
+		"sass": "^1.55.0",
+		"sass-loader": "^13.2.0",
+		"stylelint": "^14.2.0",
+		"stylelint-config-standard-scss": "^3.0.0",
+		"stylelint-order": "^5.0.0",
+		"stylelint-scss": "^4.1.0",
+		"webpack": "^5.65.0",
+		"webpack-cli": "^4.9.1"
+	}
+}

@@ -1,0 +1,153 @@
+@import 'variables';
+
+.robroy-open {
+	overflow: hidden;
+}
+
+.robroy {
+	align-items: center;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: $robroy-z-index;
+}
+
+.robroy__figure {
+	position: relative;
+	z-index: $robroy-figure-z-index;
+}
+
+.robroy__overlay {
+	background-color: $robroy-overlay-background;
+	bottom: 0;
+	cursor: pointer;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+
+.robroy__img {
+	cursor: pointer;
+	display: block;
+	margin: 0 auto;
+}
+
+.robroy__caption {
+	color: $robroy-caption-color;
+	font-size: $robroy-caption-font-size;
+	line-height: $robroy-caption-line-height;
+	margin-top: $robroy-caption-margin-top;
+	min-width: $robroy-caption-min-width;
+
+	// TODO: <a> color.
+}
+
+.robroy__button {
+	background: $robroy-button-background-color;
+	border-radius: 0;
+	border-width: 0;
+	cursor: pointer;
+	font-size: 0;
+	height: $robroy-icon-size;
+	line-height: 1;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	width: $robroy-icon-size;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background: $robroy-button-background-color;
+	}
+}
+
+.robroy__button--close {
+	position: fixed;
+	right: 0;
+	top: 0;
+
+	&::after {
+		color: $robroy-close-color;
+		content: $robroy-close-content;
+		display: block;
+		font-family: $robroy-close-font-family;
+		font-size: $robroy-close-font-size;
+		font-weight: $robroy-close-font-weight;
+	}
+}
+
+.robroy__button--nav {
+	margin-top: #{$robroy-icon-size * -.5};
+	position: fixed;
+	top: 50%;
+
+	&::after {
+		border-style: solid;
+		border-width: $robroy-arrow-size;
+		content: '';
+		display: flex;
+		left: #{($robroy-icon-size - ($robroy-arrow-size * 2)) * .5};
+		position: absolute;
+		top: #{($robroy-icon-size - ($robroy-arrow-size * 2)) * .5};
+	}
+}
+
+.robroy__button--prev {
+	left: 0;
+
+	&::after {
+		border-color: transparent $robroy-arrow-color transparent transparent;
+		margin-left: #{$robroy-arrow-size * -.5};
+	}
+}
+
+.robroy__button--next {
+	right: 0;
+
+	&::after {
+		border-color: transparent transparent transparent $robroy-arrow-color;
+		margin-left: #{$robroy-arrow-size * .5};
+	}
+}
+
+.robroy--loading {
+	&::after {
+		animation: robroy-spin $robroy-loading-duration infinite linear;
+		border-color: $robroy-loading-color $robroy-loading-color $robroy-loading-color transparent;
+		border-radius: 100px;
+		border-style: solid;
+		border-width: $robroy-loading-width;
+		content: '';
+		display: block;
+		height: $robroy-loading-size;
+		margin-right: #{$robroy-loading-size * -.5};
+		margin-top: #{$robroy-loading-size * -.5};
+		position: absolute;
+		right: 50%;
+		top: 50%;
+		width: $robroy-loading-size;
+		z-index: $robroy-loading-z-index;
+	}
+
+	.robroy__button,
+	.robroy__img,
+	.robroy__caption {
+		visibility: hidden;
+	}
+}
+
+@keyframes robroy-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(359deg);
+	}
+}
