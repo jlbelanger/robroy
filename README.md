@@ -23,6 +23,7 @@
 	- Clicking on the left side of the image shows the previous image; clicking on the right side of the image shows the next image
 	- Clicking outside of the lightbox closes the lightbox
 	- Disables body scrolling when lightbox is open
+	- Full screen mode
 
 ## Configuration
 

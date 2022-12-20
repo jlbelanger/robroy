@@ -20,6 +20,7 @@ const Robroy = {
 		args.imageClickListenerThreshold = args.imageClickListenerThreshold || 0.5;
 		args.disableOverlayClickListener = args.disableOverlayClickListener || false;
 		args.hideCloseButton = args.hideCloseButton || false;
+		args.hideFullScreenButton = args.hideFullScreenButton || false;
 		args.hideNavButtons = args.hideNavButtons || false;
 		args.hideCaption = args.hideCaption || false;
 		args.hideOverlay = args.hideOverlay || false;
@@ -31,6 +32,7 @@ const Robroy = {
 
 		const lang = args.lang || {};
 		lang.closeImage = lang.closeImage || 'Close Image';
+		lang.fullScreen = lang.fullScreen || 'Full Screen';
 		lang.previousImage = lang.previousImage || 'Previous Image';
 		lang.nextImage = lang.nextImage || 'Next Image';
 		Robroy.lang = lang;
@@ -161,6 +163,16 @@ const Robroy = {
 			$figure.appendChild($closeButton);
 		}
 
+		if (!Robroy.args.hideFullScreenButton) {
+			const $fullScreenButton = document.createElement('button');
+			$fullScreenButton.setAttribute('class', 'robroy__button robroy__button--full-screen');
+			$fullScreenButton.setAttribute('title', Robroy.lang.fullScreen);
+			$fullScreenButton.setAttribute('type', 'button');
+			$fullScreenButton.addEventListener('click', Robroy.fullScreen);
+			$fullScreenButton.innerText = Robroy.lang.fullScreen;
+			$figure.appendChild($fullScreenButton);
+		}
+
 		if (!Robroy.args.hideNavButtons) {
 			const $prevButton = document.createElement('button');
 			$prevButton.setAttribute('class', 'robroy__button robroy__button--nav robroy__button--prev');
@@ -250,6 +262,13 @@ const Robroy = {
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${Robroy.currentIndex - 1}"]`);
 		Robroy.setImage($thumbnail);
+	},
+	fullScreen: () => {
+		if (!document.fullscreenElement) {
+			document.body.requestFullscreen();
+		} else {
+			document.exitFullscreen();
+		}
 	},
 	getCaption: ($thumbnail) => {
 		if ($thumbnail.getAttribute('data-robroy-caption')) {

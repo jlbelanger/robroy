@@ -82,8 +82,6 @@
 	line-height: $robroy-caption-line-height;
 	margin-top: $robroy-caption-margin-top;
 	min-width: $robroy-caption-min-width;
-
-	// TODO: <a> color.
 }
 
 .robroy__button {
@@ -118,6 +116,26 @@
 		font-family: $robroy-close-font-family;
 		font-size: $robroy-close-font-size;
 		font-weight: $robroy-close-font-weight;
+	}
+}
+
+.robroy__button--full-screen {
+	position: fixed;
+	right: $robroy-icon-size;
+	top: 0;
+
+	&::before {
+		background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(#{red($robroy-full-screen-color)},#{green($robroy-full-screen-color)},#{blue($robroy-full-screen-color)},#{alpha($robroy-full-screen-color)})" d="M0 0v20h10V10h10V0H0zM30 0v10h10v10h10V0H30zM0 50h20V40H10V30H0v10zM50 50H30V40h10V30h10v10z"/></svg>');
+		background-repeat: no-repeat;
+		content: '';
+		display: block;
+		height: $robroy-full-screen-size;
+		margin-right: #{$robroy-full-screen-size * -.5};
+		margin-top: #{$robroy-full-screen-size * -.5};
+		position: absolute;
+		right: 50%;
+		top: 50%;
+		width: $robroy-full-screen-size;
 	}
 }
 
