@@ -28,6 +28,7 @@ const Robroy = {
 		args.imgLoadIntervalMilliseconds = args.imgLoadIntervalMilliseconds || 250;
 		args.animateInClass = args.animateInClass || 'robroy-fade-in';
 		args.animateOutClass = args.animateOutClass || 'robroy-fade-out';
+		args.enableLoop = args.enableLoop || false;
 		Robroy.args = args;
 
 		const lang = args.lang || {};
@@ -252,21 +253,33 @@ const Robroy = {
 		Robroy.activeElement = null;
 	},
 	next: () => {
+		let i = Robroy.currentIndex + 1;
+
 		// Do not allow going past the last image.
 		if (Robroy.currentIndex >= (Robroy.numImages - 1)) {
-			return;
+			if (!Robroy.args.enableLoop) {
+				return;
+			}
+
+			i = 0;
 		}
 
-		const $thumbnail = document.querySelector(`[data-robroy-index="${Robroy.currentIndex + 1}"]`);
+		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
 		Robroy.setImage($thumbnail);
 	},
 	previous: () => {
+		let i = Robroy.currentIndex - 1;
+
 		// Do not allow going past the first image.
 		if (Robroy.currentIndex <= 0) {
-			return;
+			if (!Robroy.args.enableLoop) {
+				return;
+			}
+
+			i = Robroy.numImages - 1;
 		}
 
-		const $thumbnail = document.querySelector(`[data-robroy-index="${Robroy.currentIndex - 1}"]`);
+		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
 		Robroy.setImage($thumbnail);
 	},
 	fullScreen: () => {
@@ -309,7 +322,7 @@ const Robroy = {
 		Robroy.currentIndex = parseInt($thumbnail.getAttribute('data-robroy-index'), 10);
 
 		// Show/hide navigation.
-		if (!Robroy.args.hideNavButtons) {
+		if (!Robroy.args.hideNavButtons && !Robroy.args.enableLoop) {
 			const $prevButton = $container.querySelector('.robroy__button--prev');
 			const $nextButton = $container.querySelector('.robroy__button--next');
 			if (Robroy.currentIndex <= 0) {
