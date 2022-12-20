@@ -31,8 +31,12 @@ $robroy-loading-duration: 2s !default;
 $robroy-loading-size: 32px !default;
 $robroy-loading-width: 6px !default;
 
+$robroy-number-color: $robroy-white !default;
+$robroy-number-padding: 4px !default;
+
 $robroy-overlay-background: rgba($robroy-black, .8) !default;
 
 $robroy-figure-z-index: 9998 !default;
+$robroy-number-z-index: 9998 !default;
 $robroy-z-index: 9997 !default;
 $robroy-loading-z-index: 9995 !default;

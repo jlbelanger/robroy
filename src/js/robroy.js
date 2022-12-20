@@ -29,6 +29,7 @@ const Robroy = {
 		args.animateInClass = args.animateInClass || 'robroy-fade-in';
 		args.animateOutClass = args.animateOutClass || 'robroy-fade-out';
 		args.enableLoop = args.enableLoop || false;
+		args.showNumber = args.showNumber || false;
 		Robroy.args = args;
 
 		const lang = args.lang || {};
@@ -36,6 +37,7 @@ const Robroy = {
 		lang.fullScreen = lang.fullScreen || 'Full Screen';
 		lang.previousImage = lang.previousImage || 'Previous Image';
 		lang.nextImage = lang.nextImage || 'Next Image';
+		lang.xOfY = lang.xOfY || '[current] / [total]';
 		Robroy.lang = lang;
 
 		// Add thumbnail click listeners.
@@ -204,6 +206,12 @@ const Robroy = {
 			$figure.appendChild($figcaption);
 		}
 
+		if (Robroy.args.showNumber) {
+			const $number = document.createElement('span');
+			$number.setAttribute('class', 'robroy__number');
+			$container.appendChild($number);
+		}
+
 		if (!Robroy.args.hideOverlay) {
 			const $overlay = document.createElement('div');
 			$overlay.setAttribute('class', 'overlay robroy__overlay');
@@ -335,6 +343,13 @@ const Robroy = {
 			} else {
 				$nextButton.style.display = '';
 			}
+		}
+
+		// Update number.
+		if (Robroy.args.showNumber) {
+			const $number = $container.querySelector('.robroy__number');
+			const i = parseInt($thumbnail.getAttribute('data-robroy-index'), 10) + 1;
+			$number.innerText = Robroy.lang.xOfY.replace('[current]', i).replace('[total]', Robroy.numImages);
 		}
 
 		// Set image.

@@ -87,6 +87,15 @@
 	min-width: $robroy-caption-min-width;
 }
 
+.robroy__number {
+	bottom: 0;
+	color: $robroy-number-color;
+	padding: $robroy-number-padding;
+	position: fixed;
+	right: 0;
+	z-index: $robroy-number-z-index;
+}
+
 .robroy__button {
 	background: $robroy-button-background-color;
 	border-radius: 0;

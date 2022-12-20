@@ -24,6 +24,8 @@
 	- Clicking outside of the lightbox closes the lightbox
 	- Disables body scrolling when lightbox is open
 	- Full screen mode
+	- Loop
+	- Image number
 
 ## Configuration
 
