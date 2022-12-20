@@ -143,10 +143,9 @@ const Robroy = {
 			document.body.classList.add(Robroy.args.bodyClass);
 		}
 
-		const $container = document.createElement('div');
+		const $container = document.createElement('dialog');
 		$container.setAttribute('class', `robroy ${Robroy.args.animateInClass}`.trim());
 		$container.setAttribute('id', Robroy.args.id);
-		$container.setAttribute('tabindex', '-1');
 		document.body.appendChild($container);
 
 		const $figure = document.createElement('figure');
@@ -189,7 +188,6 @@ const Robroy = {
 			$nextButton.innerText = Robroy.lang.nextImage;
 			$nextButton.addEventListener('click', Robroy.next);
 			$figure.appendChild($nextButton);
-			$nextButton.focus();
 		}
 
 		const $img = document.createElement('img');
@@ -216,6 +214,10 @@ const Robroy = {
 
 		Robroy.setImage($thumbnail);
 
+		// Trap focus inside the lightbox.
+		$container.showModal();
+		$container.focus();
+
 		// Animate in.
 		if (Robroy.args.animateInClass) {
 			const duration = Robroy.getAnimationDuration($container);
@@ -229,21 +231,25 @@ const Robroy = {
 			document.body.classList.remove('robroy-open');
 		}
 
-		// Return focus to the previously focused element.
-		Robroy.activeElement.focus();
-		Robroy.activeElement = null;
-
 		// Animate out.
 		const $container = document.getElementById(Robroy.args.id);
 		if (Robroy.args.animateOutClass) {
 			$container.classList.add(Robroy.args.animateOutClass);
 			const duration = Robroy.getAnimationDuration($container);
 			setTimeout(() => {
-				$container.remove();
+				Robroy.onClose($container);
 			}, duration + 100);
 		} else {
-			$container.remove();
+			Robroy.onClose($container);
 		}
+	},
+	onClose: ($container) => {
+		// Remove the lightbox.
+		$container.remove();
+
+		// Return focus to the previously focused element.
+		Robroy.activeElement.focus();
+		Robroy.activeElement = null;
 	},
 	next: () => {
 		// Do not allow going past the last image.
