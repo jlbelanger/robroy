@@ -152,16 +152,6 @@ const Robroy = {
 		$figure.setAttribute('class', 'robroy__figure robroy__figure--loading');
 		$container.appendChild($figure);
 
-		if (!Robroy.args.hideCloseButton) {
-			const $closeButton = document.createElement('button');
-			$closeButton.setAttribute('class', 'robroy__button robroy__button--close');
-			$closeButton.setAttribute('title', Robroy.lang.closeImage);
-			$closeButton.setAttribute('type', 'button');
-			$closeButton.addEventListener('click', Robroy.close);
-			$closeButton.innerText = Robroy.lang.closeImage;
-			$figure.appendChild($closeButton);
-		}
-
 		if (!Robroy.args.hideFullScreenButton) {
 			const $fullScreenButton = document.createElement('button');
 			$fullScreenButton.setAttribute('class', 'robroy__button robroy__button--full-screen');
@@ -170,6 +160,16 @@ const Robroy = {
 			$fullScreenButton.addEventListener('click', Robroy.fullScreen);
 			$fullScreenButton.innerText = Robroy.lang.fullScreen;
 			$figure.appendChild($fullScreenButton);
+		}
+
+		if (!Robroy.args.hideCloseButton) {
+			const $closeButton = document.createElement('button');
+			$closeButton.setAttribute('class', 'robroy__button robroy__button--close');
+			$closeButton.setAttribute('title', Robroy.lang.closeImage);
+			$closeButton.setAttribute('type', 'button');
+			$closeButton.addEventListener('click', Robroy.close);
+			$closeButton.innerText = Robroy.lang.closeImage;
+			$figure.appendChild($closeButton);
 		}
 
 		if (!Robroy.args.hideNavButtons) {
