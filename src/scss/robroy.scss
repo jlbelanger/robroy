@@ -17,6 +17,10 @@
 	right: 0;
 	top: 0;
 	z-index: $robroy-z-index;
+
+	&::backdrop {
+		background: transparent;
+	}
 }
 
 .robroy-fade-in {
@@ -59,6 +63,7 @@
 }
 
 .robroy__figure {
+	margin: 0;
 	position: relative;
 	z-index: $robroy-figure-z-index;
 }
