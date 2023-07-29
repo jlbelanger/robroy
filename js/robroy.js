@@ -465,6 +465,4 @@ const Robroy = {
 	),
 };
 
-window.robroy = (args) => {
-	Robroy.init(args);
-};
+export default Robroy;

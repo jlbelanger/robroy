@@ -60,7 +60,7 @@ yarn install
 In the `robroy` folder, run:
 
 ``` bash
-yarn watch
+yarn start
 ```
 
 ### Lint

@@ -1,0 +1,131 @@
+body {
+	background: #fff;
+	color: #000;
+	font-family: sans-serif;
+	margin: 0 auto;
+	max-width: 800px;
+	padding: 1rem;
+}
+
+body::backdrop {
+	background: #fff;
+}
+
+figure {
+	margin: 0;
+}
+
+a {
+	color: #00f;
+}
+
+a:hover,
+a:active,
+a:focus {
+	text-decoration: none;
+}
+
+a[data-robroy] {
+	display: inline-block;
+}
+
+a[data-robroy] figcaption {
+	font-size: 1rem;
+}
+
+img {
+	display: block;
+}
+
+:focus {
+	box-shadow: 0 0 0 4px turquoise;
+	outline: none !important; // stylelint-disable-line declaration-no-important
+}
+
+.robroy__caption a {
+	color: #fff;
+}
+
+figcaption {
+	margin-top: .25rem;
+}
+
+figcaption > :first-child {
+	margin-top: 0;
+}
+
+h1 {
+	margin: 0;
+}
+
+h2 {
+	margin: 2rem 0 .25rem;
+}
+
+p {
+	margin: 1rem 0 0;
+}
+
+button {
+	background: turquoise;
+	border-color:
+		scale-color(turquoise, $lightness: 25%)
+		scale-color(turquoise, $lightness: -25%)
+		scale-color(turquoise, $lightness: -25%)
+		scale-color(turquoise, $lightness: 25%);
+	border-radius: .25rem;
+	border-style: solid;
+	border-width: 2px;
+	color: #000;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: 1rem;
+	font-weight: bold;
+	padding: .5rem;
+}
+
+pre {
+	margin: .25rem 0 0;
+}
+
+.code {
+	background: #f0f0f0;
+	border: 1px solid #eee;
+	display: block;
+	padding: 1rem;
+	white-space: pre-wrap;
+
+	@media (prefers-color-scheme: dark) {
+		background: #111;
+		border-color: #000;
+		color: #fff;
+	}
+}
+
+#dynamic-container {
+	font-size: 0;
+}
+
+.code__element {
+	color: maroon;
+
+	@media (prefers-color-scheme: dark) {
+		color: deeppink;
+	}
+}
+
+.code__attribute {
+	color: red;
+
+	@media (prefers-color-scheme: dark) {
+		color: greenyellow;
+	}
+}
+
+.code__value {
+	color: blue;
+
+	@media (prefers-color-scheme: dark) {
+		color: khaki;
+	}
+}

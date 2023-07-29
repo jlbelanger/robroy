@@ -1,5 +1,6 @@
 .DS_Store
 .eslintcache
 *.log
+build
 node_modules
 TODO.md
