@@ -36,7 +36,11 @@ $robroy-number-padding: 4px !default;
 
 $robroy-overlay-background: rgba($robroy-black, .9) !default;
 
+$robroy-track-transition-duration: 100ms !default;
+$robroy-track-transition-easing: ease-in-out !default;
+
 $robroy-figure-z-index: 9998 !default;
+$robroy-button-z-index: 9998 !default;
 $robroy-number-z-index: 9998 !default;
 $robroy-z-index: 9997 !default;
 $robroy-loading-z-index: 9995 !default;

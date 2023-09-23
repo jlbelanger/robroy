@@ -82,3 +82,4 @@ yarn build
 ## Credits
 
 - Debounce: https://davidwalsh.name/javascript-debounce-function
+- Touch Handler: https://stackoverflow.com/a/6362527

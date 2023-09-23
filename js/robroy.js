@@ -7,18 +7,21 @@ const Robroy = {
 	currentIndex: null,
 	isInited: false,
 	numImages: 0,
+	swipeX: null,
 	init: (args) => {
 		args = args || {};
 		args.selector = args.disableKeyPressListener || '[data-robroy]';
 		args.bodyClass = args.bodyClass || 'robroy-open';
 		args.id = args.id || 'robroy';
 		args.disableKeyPressListener = args.disableKeyPressListener || false;
+		args.disableMouseOutListener = args.disableMouseOutListener || false;
 		args.disableResizeListener = args.disableResizeListener || false;
 		args.resizeDebounceMilliseconds = args.resizeDebounceMilliseconds || 100;
 		args.minScreenWidth = args.minScreenWidth || 400;
-		args.disableImageClickListener = args.disableImageClickListener || false;
+		args.disableImageClickListener = args.disableImageClickListener || true;
 		args.imageClickListenerThreshold = args.imageClickListenerThreshold || 0.5;
 		args.disableOverlayClickListener = args.disableOverlayClickListener || false;
+		args.disableSwipeNav = args.disableSwipeNav || false;
 		args.hideCloseButton = args.hideCloseButton || false;
 		args.hideFullScreenButton = args.hideFullScreenButton || false;
 		args.hideNavButtons = args.hideNavButtons || false;
@@ -45,9 +48,11 @@ const Robroy = {
 		const num = $thumbnails.length;
 		let i;
 		for (i = 0; i < num; i += 1) {
-			$thumbnails[i].addEventListener('click', Robroy.onClickThumbnail);
-			$thumbnails[i].setAttribute('data-robroy-index', i);
-			Robroy.numImages += 1;
+			if (!$thumbnails[i].getAttribute('data-robroy-index')) {
+				$thumbnails[i].addEventListener('click', Robroy.onClickThumbnail);
+				$thumbnails[i].setAttribute('data-robroy-index', i);
+				Robroy.numImages += 1;
+			}
 		}
 
 		if (Robroy.isInited || Robroy.numImages <= 0) {
@@ -70,6 +75,13 @@ const Robroy = {
 					Robroy.close();
 				}
 			}, false);
+		}
+
+		// Add mouseout listener.
+		if (!args.disableSwipeNav && !args.disableMouseOutListener) {
+			document.addEventListener('mouseout', () => {
+				Robroy.onTouchEnd();
+			});
 		}
 
 		// Add window resize listener.
@@ -123,15 +135,17 @@ const Robroy = {
 		const $figcaption = $container.querySelector('.robroy__caption');
 		Robroy.setSize($img, $figcaption);
 	},
-	getAnimationDuration: (elem) => {
-		let animationDuration = getComputedStyle(elem).animationDuration;
-		if (animationDuration.includes('ms')) {
-			animationDuration = parseFloat(animationDuration.replace('ms', ''));
-		} else if (animationDuration.includes('s')) {
-			animationDuration = parseFloat(animationDuration.replace('s', '')) * 1000;
+	getDuration: (elem, attribute) => {
+		let duration = getComputedStyle(elem)[attribute];
+		if (duration.includes('ms')) {
+			duration = parseFloat(duration.replace('ms', ''));
+		} else if (duration.includes('s')) {
+			duration = parseFloat(duration.replace('s', '')) * 1000;
 		}
-		return animationDuration;
+		return duration;
 	},
+	getAnimationDuration: (elem) => (Robroy.getDuration(elem, 'animationDuration')),
+	getTransitionDuration: (elem) => (Robroy.getDuration(elem, 'transitionDuration')),
 	open: ($thumbnail) => {
 		// Disallow multiple open lightboxes.
 		if (document.getElementById(Robroy.args.id)) {
@@ -151,9 +165,13 @@ const Robroy = {
 		$container.setAttribute('id', Robroy.args.id);
 		document.body.appendChild($container);
 
-		const $figure = document.createElement('figure');
-		$figure.setAttribute('class', 'robroy__figure robroy__figure--loading');
-		$container.appendChild($figure);
+		const $track = document.createElement('div');
+		$track.setAttribute('class', 'robroy__track');
+		$container.appendChild($track);
+
+		Robroy.addItem($track, $thumbnail, 'active');
+		Robroy.addItem($track, $thumbnail, 'prev');
+		Robroy.addItem($track, $thumbnail, 'next');
 
 		if (!Robroy.args.hideFullScreenButton) {
 			const $fullScreenButton = document.createElement('button');
@@ -162,7 +180,7 @@ const Robroy = {
 			$fullScreenButton.setAttribute('type', 'button');
 			$fullScreenButton.addEventListener('click', Robroy.fullScreen);
 			$fullScreenButton.innerText = Robroy.lang.fullScreen;
-			$figure.appendChild($fullScreenButton);
+			$container.appendChild($fullScreenButton);
 		}
 
 		if (!Robroy.args.hideCloseButton) {
@@ -172,7 +190,7 @@ const Robroy = {
 			$closeButton.setAttribute('type', 'button');
 			$closeButton.addEventListener('click', Robroy.close);
 			$closeButton.innerText = Robroy.lang.closeImage;
-			$figure.appendChild($closeButton);
+			$container.appendChild($closeButton);
 		}
 
 		if (!Robroy.args.hideNavButtons) {
@@ -182,7 +200,7 @@ const Robroy = {
 			$prevButton.setAttribute('type', 'button');
 			$prevButton.addEventListener('click', Robroy.previous);
 			$prevButton.innerText = Robroy.lang.previousImage;
-			$figure.appendChild($prevButton);
+			$container.appendChild($prevButton);
 
 			const $nextButton = document.createElement('button');
 			$nextButton.setAttribute('class', 'robroy__button robroy__button--nav robroy__button--next');
@@ -190,20 +208,7 @@ const Robroy = {
 			$nextButton.setAttribute('type', 'button');
 			$nextButton.innerText = Robroy.lang.nextImage;
 			$nextButton.addEventListener('click', Robroy.next);
-			$figure.appendChild($nextButton);
-		}
-
-		const $img = document.createElement('img');
-		$img.setAttribute('class', 'robroy__img');
-		if (!Robroy.args.disableImageClickListener) {
-			$img.addEventListener('click', Robroy.onClickImage);
-		}
-		$figure.appendChild($img);
-
-		if (!Robroy.args.hideCaption) {
-			const $figcaption = document.createElement('figcaption');
-			$figcaption.setAttribute('class', 'robroy__caption');
-			$figure.appendChild($figcaption);
+			$container.appendChild($nextButton);
 		}
 
 		if (Robroy.args.showNumber) {
@@ -221,7 +226,7 @@ const Robroy = {
 			$container.appendChild($overlay);
 		}
 
-		Robroy.setImage($thumbnail);
+		Robroy.setActiveImage($thumbnail);
 
 		// Trap focus inside the lightbox.
 		$container.showModal();
@@ -234,6 +239,127 @@ const Robroy = {
 				$container.classList.remove(Robroy.args.animateInClass);
 			}, duration + 100);
 		}
+	},
+	onTouchStart: (e) => {
+		if (e.buttons !== 1) {
+			// Don't do anything for right clicks.
+			return;
+		}
+
+		// Save the initial touch position.
+		Robroy.swipeX = e.clientX;
+	},
+	onTouchMove: (e) => {
+		if (Robroy.swipeX === null) {
+			return;
+		}
+
+		// Move the track.
+		const $track = document.querySelector('.robroy__track');
+		const x = e.clientX - Robroy.swipeX;
+		$track.style.transform = `translate3d(${x}px, 0, 0)`;
+		$track.setAttribute('data-robroy-dir', x > 0 ? 'prev' : 'next');
+	},
+	onTouchEnd: () => {
+		if (Robroy.swipeX === null) {
+			return;
+		}
+
+		// Move the track all the way to the adjacent image.
+		const $track = document.querySelector('.robroy__track');
+		const transitionDuration = Robroy.getTransitionDuration($track);
+		const dir = $track.getAttribute('data-robroy-dir');
+		const x = dir === 'prev' ? window.innerWidth : -1 * window.innerWidth;
+		$track.style.transform = `translate3d(${x}px, 0, 0)`;
+
+		// Reset swipe settings.
+		Robroy.swipeX = null;
+		$track.removeAttribute('data-robroy-dir');
+
+		// Actually go to the previous/next image.
+		setTimeout(() => {
+			$track.style.transition = 'none';
+			$track.style.transform = null;
+			if (dir === 'prev') {
+				Robroy.previous();
+			} else {
+				Robroy.next();
+			}
+			setTimeout(() => {
+				$track.style.transition = null;
+			});
+		}, transitionDuration + 100);
+	},
+	simulateEvent: (e) => {
+		const touch = e.changedTouches[0];
+		const simulatedEvent = document.createEvent('MouseEvent');
+		simulatedEvent.initMouseEvent(
+			{
+				touchstart: 'mousedown',
+				touchmove: 'mousemove',
+				touchend: 'mouseup',
+				touchcancel: 'mouseup',
+			}[e.type],
+			true,
+			true,
+			window,
+			1,
+			touch.screenX,
+			touch.screenY,
+			touch.clientX,
+			touch.clientY,
+			false,
+			false,
+			false,
+			false,
+			0,
+			null
+		);
+		return simulatedEvent;
+	},
+	touchHandler: (e) => {
+		const touch = e.changedTouches[0];
+		touch.target.dispatchEvent(Robroy.simulateEvent(e));
+		e.preventDefault();
+	},
+	addItem: ($track, $thumbnail, className) => {
+		const $container = document.createElement('div');
+		$container.setAttribute('class', `robroy__item robroy__item--${className}`);
+		if (className === 'prev') {
+			$track.prepend($container);
+		} else {
+			$track.appendChild($container);
+		}
+
+		const $figure = document.createElement('figure');
+		$figure.setAttribute('class', 'robroy__figure robroy__figure--loading');
+		$container.appendChild($figure);
+
+		const $img = document.createElement('img');
+		$img.setAttribute('class', 'robroy__img');
+		if (!Robroy.args.disableSwipeNav) {
+			$img.addEventListener('mousedown', Robroy.onTouchStart, false);
+			$img.addEventListener('mousemove', Robroy.onTouchMove, false);
+			$img.addEventListener('mouseup', Robroy.onTouchEnd, false);
+			$img.addEventListener('touchstart', Robroy.touchHandler, true);
+			$img.addEventListener('touchmove', Robroy.touchHandler, true);
+			$img.addEventListener('touchend', Robroy.touchHandler, true);
+			$img.addEventListener('touchcancel', Robroy.touchHandler, true);
+		}
+		if (!Robroy.args.disableImageClickListener) {
+			$img.addEventListener('click', Robroy.onClickImage);
+		}
+		$figure.appendChild($img);
+
+		if (!Robroy.args.hideCaption) {
+			const $figcaption = document.createElement('figcaption');
+			$figcaption.setAttribute('class', 'robroy__caption');
+			$figure.appendChild($figcaption);
+		}
+
+		Robroy.setImageAttributes($figure, $thumbnail);
+
+		return $figure;
 	},
 	close: () => {
 		if (Robroy.args.bodyClass) {
@@ -273,7 +399,7 @@ const Robroy = {
 		}
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
-		Robroy.setImage($thumbnail);
+		Robroy.setActiveImage($thumbnail);
 	},
 	previous: () => {
 		let i = Robroy.currentIndex - 1;
@@ -288,7 +414,7 @@ const Robroy = {
 		}
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
-		Robroy.setImage($thumbnail);
+		Robroy.setActiveImage($thumbnail);
 	},
 	fullScreen: () => {
 		if (!document.fullscreenElement) {
@@ -321,13 +447,15 @@ const Robroy = {
 
 		return '';
 	},
-	setImage: ($thumbnail) => {
+	setActiveImage: ($thumbnail) => {
+		const index = parseInt($thumbnail.getAttribute('data-robroy-index'), 10);
+
 		// Show loading icon.
 		const $container = document.getElementById(Robroy.args.id);
 		$container.classList.add('robroy--loading');
 
 		// Save current element index.
-		Robroy.currentIndex = parseInt($thumbnail.getAttribute('data-robroy-index'), 10);
+		Robroy.currentIndex = index;
 
 		// Show/hide navigation.
 		if (!Robroy.args.hideNavButtons && !Robroy.args.enableLoop) {
@@ -348,19 +476,45 @@ const Robroy = {
 		// Update number.
 		if (Robroy.args.showNumber) {
 			const $number = $container.querySelector('.robroy__number');
-			const i = parseInt($thumbnail.getAttribute('data-robroy-index'), 10) + 1;
+			const i = index + 1;
 			$number.innerText = Robroy.lang.xOfY.replace('[current]', i).replace('[total]', Robroy.numImages);
 		}
 
-		// Set image.
-		const $img = $container.querySelector('.robroy__img');
+		// Reset track position.
+		const $track = document.querySelector('.robroy__track');
+		$track.style.transform = null;
+		$track.removeAttribute('data-robroy-dir');
+
+		// Set the active image.
+		const $figure = document.querySelector('.robroy__item--active .robroy__figure');
+		Robroy.setImageAttributes($figure, $thumbnail);
+
+		// Set the previous image.
+		const prevIndex = index <= 0 ? Robroy.numImages - 1 : index - 1;
+		const $prevThumbnail = document.querySelector(`[data-robroy-index="${prevIndex}"]`);
+		if ($prevThumbnail) {
+			const $prevFigure = document.querySelector('.robroy__item--prev .robroy__figure');
+			Robroy.setImageAttributes($prevFigure, $prevThumbnail);
+		}
+
+		// Set the next image.
+		const nextIndex = index >= (Robroy.numImages - 1) ? 0 : index + 1;
+		const $nextThumbnail = document.querySelector(`[data-robroy-index="${nextIndex}"]`);
+		if ($nextThumbnail) {
+			const $nextFigure = document.querySelector('.robroy__item--next .robroy__figure');
+			Robroy.setImageAttributes($nextFigure, $nextThumbnail);
+		}
+	},
+	setImageAttributes: ($figure, $thumbnail) => {
+		// Set image src.
+		const $img = $figure.querySelector('.robroy__img');
 		let src = $thumbnail.getAttribute('data-robroy-href');
 		if (!src) {
 			src = $thumbnail.getAttribute('href');
 		}
 		$img.setAttribute('src', src);
 
-		// Set image size.
+		// Set image dimensions.
 		const height = $thumbnail.getAttribute('data-robroy-height');
 		const width = $thumbnail.getAttribute('data-robroy-width');
 		if (height && width) {
@@ -370,7 +524,7 @@ const Robroy = {
 		}
 
 		// Show/hide caption.
-		const $figcaption = $container.querySelector('.robroy__caption');
+		const $figcaption = $figure.querySelector('.robroy__caption');
 		const caption = Robroy.getCaption($thumbnail);
 		if (caption) {
 			$figcaption.style.display = '';
@@ -380,28 +534,26 @@ const Robroy = {
 			$figcaption.innerText = '';
 		}
 
-		const $figure = $container.querySelector('.robroy__figure');
+		// Wait for the image to load.
 		if ($img.complete) {
-			Robroy.setSize($img, $figcaption);
-
-			// Remove loading icon.
-			$container.classList.remove('robroy--loading');
-			$figure.classList.remove('robroy__figure--loading');
+			Robroy.onImageLoad($figure, $img, $figcaption);
 		} else {
-			// Wait for image to load.
 			let int = setInterval(() => {
 				if ($img.complete) {
 					clearInterval(int);
 					int = null;
-
-					Robroy.setSize($img, $figcaption);
-
-					// Remove loading icon.
-					$container.classList.remove('robroy--loading');
-					$figure.classList.remove('robroy__figure--loading');
+					Robroy.onImageLoad($figure, $img, $figcaption);
 				}
 			}, Robroy.args.imgLoadIntervalMilliseconds);
 		}
+	},
+	onImageLoad: ($figure, $img, $figcaption) => {
+		Robroy.setSize($img, $figcaption);
+
+		// Remove loading icon.
+		const $container = document.getElementById(Robroy.args.id);
+		$container.classList.remove('robroy--loading');
+		$figure.classList.remove('robroy__figure--loading');
 	},
 	getSize: (height, width) => {
 		const margin = Robroy.getMargin();
