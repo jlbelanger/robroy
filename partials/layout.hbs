@@ -1,0 +1,30 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta property="og:title" content="{{metaTitle title}}Robroy Lightbox">
+		<title>{{metaTitle title}}Robroy Lightbox</title>
+		<script integrity="sha256-tuKyZn/3ycw/MNMDii/kvSPrelo6SCsJSecqb1n2neg=">document.documentElement.classList.remove('no-js');</script>
+	</head>
+	<body>
+		<a href="#content" id="skip">Skip to content</a>
+
+		<header id="header">
+			<h1>Robroy Lightbox</h1>
+
+			<nav>
+				<ul id="nav">
+					<li{{{activeClass 'index.html' filename}}}><a href="/">Examples</a></li>
+					<li{{{activeClass 'installation.html' filename}}}><a href="/installation.html">Installation</a></li>
+					<li{{{activeClass 'usage.html' filename}}}><a href="/usage.html">Usage</a></li>
+					<li{{{activeClass 'options.html' filename}}}><a href="/options.html">Options</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<article id="content">
+			{{> @partial-block}}
+		</article>
+	</body>
+</html>

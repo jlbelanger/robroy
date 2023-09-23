@@ -1,50 +1,39 @@
-<!doctype html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title>Robroy Lightbox</title>
-		<script integrity="sha256-tuKyZn/3ycw/MNMDii/kvSPrelo6SCsJSecqb1n2neg=">document.documentElement.classList.remove('no-js');</script>
-	</head>
-	<body>
-		<h1>Robroy Lightbox</h1>
+{{#> ../partials/layout}}
+<h2>Examples</h2>
 
-		<h2>Basic example</h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P7164878.JPG" data-robroy>
+<h3>Basic example</h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P7164878.JPG" data-robroy>
 	<img src="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P7164878-377x283.jpg" height="141" width="188">
-</a>
+</a>'}}}
 
-<script src="robroy.min.js"></script>
-<script>window.robroy();</script>'}}}
-
-		<h2>Image with <code>data-robroy-caption</code> attribute</h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_6037.jpg" data-robroy data-robroy-caption="Curabitur viverra enim nunc, sit amet euismod mauris luctus eget.">
+<h3>Image with <code>data-robroy-caption</code> attribute</h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_6037.jpg" data-robroy data-robroy-caption="Curabitur viverra enim nunc, sit amet euismod mauris luctus eget.">
 	<img src="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_6037-377x251.jpg" height="125" width="188">
 </a>'}}}
 
-		<h2>Image with <code>&lt;figcaption&gt;</code> inside link</h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2016/05/P1220804e.jpg" data-robroy>
+<h3>Image with <code>&lt;figcaption&gt;</code> inside link</h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2016/05/P1220804e.jpg" data-robroy>
 	<figure>
 		<img src="https://photography.jennybelanger.com/wp-content/uploads/2016/05/P1220804e-377x503.jpg" height="251" width="188">
 		<figcaption>Nunc mi quam, molestie vitae est sed.</figcaption>
 	</figure>
 </a>'}}}
 
-		<h2>Image with <code>&lt;figcaption&gt;</code> outside link</h2>
-		{{{code '<figure>
+<h3>Image with <code>&lt;figcaption&gt;</code> outside link</h3>
+{{{code '<figure>
 	<a href="https://photography.jennybelanger.com/wp-content/uploads/2016/05/P1230614e.jpg" data-robroy>
 		<img src="https://photography.jennybelanger.com/wp-content/uploads/2016/05/P1230614e-377x503.jpg" height="251" width="188">
 	</a>
 	<figcaption>Quisque elementum, enim ultrices euismod tempus.</figcaption>
 </figure>'}}}
 
-		<h2>Image with <code>alt</code> attribute</h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2016/07/DSC_0167e.jpg" data-robroy>
+<h3>Image with <code>alt</code> attribute</h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2016/07/DSC_0167e.jpg" data-robroy>
 	<img alt="Suspendisse et vehicula justo, a maximus augue" src="https://photography.jennybelanger.com/wp-content/uploads/2016/07/DSC_0167e-377x565.jpg" height="282" width="188">
 </a>'}}}
 
-		<h2>Image with really long caption, including HTML</h2>
-		{{{code '<figure>
+<h3>Image with really long caption, including HTML</h3>
+{{{code '<figure>
 	<a href="https://photography.jennybelanger.com/wp-content/uploads/2016/12/DSC_2619.jpg" data-robroy>
 		<img src="https://photography.jennybelanger.com/wp-content/uploads/2016/12/DSC_2619-377x251.jpg" height="125" width="188">
 	</a>
@@ -55,13 +44,13 @@
 	</figcaption>
 </figure>'}}}
 
-		<h2>Image with alternate link in <code>data-robroy-href</code></h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_5844.jpg" data-robroy data-robroy-href="https://photography.jennybelanger.com/wp-content/uploads/2016/12/DSC_0463-377x565.jpg">
+<h3>Image with alternate link in <code>data-robroy-href</code></h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_5844.jpg" data-robroy data-robroy-href="https://photography.jennybelanger.com/wp-content/uploads/2016/12/DSC_0463-377x565.jpg">
 	<img src="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_5844-377x251.jpg" height="125" width="188">
 </a>'}}}
 
-		<h2>Image with an arbitrary number of parent elements</h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P8190696.JPG" data-robroy>
+<h3>Image with an arbitrary number of parent elements</h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P8190696.JPG" data-robroy>
 	<figure>
 		<div>
 			<img src="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P8190696-377x283.jpg" height="141" width="188">
@@ -69,13 +58,13 @@
 	</figure>
 </a>'}}}
 
-		<h2>Image with pre-set height/width</h2>
-		{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_5879.jpg" data-robroy data-robroy-height="1000" data-robroy-width="667">
+<h3>Image with pre-set height/width</h3>
+{{{code '<a href="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_5879.jpg" data-robroy data-robroy-height="1000" data-robroy-width="667">
 	<img src="https://photography.jennybelanger.com/wp-content/uploads/2022/08/DSC_5879-377x565.jpg" height="282" width="188">
 </a>'}}}
 
-		<h2>Dynamically added images</h2>
-		{{{code "<button id=\"dynamic-button\" type=\"button\">Add an image</button>
+<h3>Dynamically added images</h3>
+{{{code "<button id=\"dynamic-button\" type=\"button\">Add an image</button>
 
 <p id=\"dynamic-container\"></p>
 
@@ -93,5 +82,4 @@ document.getElementById('dynamic-button').addEventListener('click', () => {
 	window.robroy();
 });
 </script>"}}}
-	</body>
-</html>
+{{/../partials/layout}}

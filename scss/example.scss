@@ -1,3 +1,7 @@
+$focus: 0 0 0 4px turquoise;
+$skip-width: 250px;
+$button-size: 44px;
+
 body {
 	background: #fff;
 	color: #000;
@@ -9,6 +13,23 @@ body {
 
 body::backdrop {
 	background: #fff;
+}
+
+#nav {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 1rem 0 0;
+	padding: 0;
+
+	li {
+		margin-right: 1rem;
+	}
+}
+
+.active a {
+	color: #000;
+	text-decoration: none;
 }
 
 figure {
@@ -38,7 +59,7 @@ img {
 }
 
 :focus {
-	box-shadow: 0 0 0 4px turquoise;
+	box-shadow: $focus;
 	outline: none !important; // stylelint-disable-line declaration-no-important
 }
 
@@ -58,8 +79,13 @@ h1 {
 	margin: 0;
 }
 
-h2 {
+h2,
+h3 {
 	margin: 2rem 0 .25rem;
+}
+
+h2 + h3 {
+	margin-top: .5rem;
 }
 
 p {
@@ -67,38 +93,31 @@ p {
 }
 
 button {
-	background: turquoise;
+	background: #ccc;
 	border-color:
-		scale-color(turquoise, $lightness: 25%)
-		scale-color(turquoise, $lightness: -25%)
-		scale-color(turquoise, $lightness: -25%)
-		scale-color(turquoise, $lightness: 25%);
-	border-radius: .25rem;
+		scale-color(#ccc, $lightness: 25%)
+		scale-color(#ccc, $lightness: -25%)
+		scale-color(#ccc, $lightness: -25%)
+		scale-color(#ccc, $lightness: 25%);
 	border-style: solid;
-	border-width: 2px;
+	border-width: 2px 3px 3px 2px;
 	color: #000;
 	cursor: pointer;
 	font-family: sans-serif;
 	font-size: 1rem;
-	font-weight: bold;
 	padding: .5rem;
 }
 
-pre {
-	margin: .25rem 0 0;
-}
-
 .code {
-	background: #f0f0f0;
-	border: 1px solid #eee;
+	background: #111;
+	border: 1px solid #000;
+	color: #fff;
 	display: block;
+	margin: .25rem 0 0;
 	padding: 1rem;
-	white-space: pre-wrap;
 
-	@media (prefers-color-scheme: dark) {
-		background: #111;
-		border-color: #000;
-		color: #fff;
+	p + & {
+		margin-top: 1rem;
 	}
 }
 
@@ -107,25 +126,57 @@ pre {
 }
 
 .code__element {
-	color: maroon;
-
-	@media (prefers-color-scheme: dark) {
-		color: deeppink;
-	}
+	color: deeppink;
 }
 
 .code__attribute {
-	color: red;
-
-	@media (prefers-color-scheme: dark) {
-		color: greenyellow;
-	}
+	color: greenyellow;
 }
 
 .code__value {
-	color: blue;
+	color: khaki;
+}
 
-	@media (prefers-color-scheme: dark) {
-		color: khaki;
+.code__comment {
+	color: gray;
+
+	span {
+		color: inherit;
+	}
+}
+
+.code__etc {
+	color: mediumpurple;
+}
+
+.code__etc2 {
+	color: deepskyblue;
+}
+
+#skip {
+	background: #ccc;
+	border: 0;
+	border-radius: 0;
+	color: #000;
+	font-size: 20px;
+	font-weight: bold;
+	height: $button-size;
+	left: 50%;
+	line-height: $button-size;
+	margin-left: #{$skip-width * -.5};
+	opacity: 0;
+	padding: 0;
+	position: absolute;
+	text-align: center;
+	text-decoration: none;
+	top: -$button-size;
+	width: $skip-width;
+	z-index: 999;
+
+	&:active,
+	&:focus {
+		box-shadow: 0 0 10px 5px rgba(#000, .2), $focus;
+		opacity: 1;
+		top: 0;
 	}
 }

@@ -1,0 +1,24 @@
+{{#> ../partials/layout title='Usage'}}
+<h2>Usage</h2>
+
+{{{code '<link href="node_modules/@jlbelanger/robroy/dist/robroy.min.css" rel="stylesheet">
+
+<a href="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P7164878.JPG" data-robroy>
+	<img src="https://photography.jennybelanger.com/wp-content/uploads/2013/02/P7164878-377x283.jpg" height="141" width="188">
+</a>
+
+<script src="node_modules/@jlbelanger/robroy/dist/robroy.min.js"></script>
+<script>window.robroy({});</script>'}}}
+
+<h3>ES6</h3>
+
+{{{code 'import Robroy from \'@jlbelanger/robroy\';
+
+if (document.querySelector(\'[data-robroy]\')) {
+	Robroy({});
+}' 'js'}}}
+
+<h3>SCSS</h3>
+
+{{{code '@import \'node_modules/@jlbelanger/robroy/scss/robroy\';' 'css'}}}
+{{/../partials/layout}}

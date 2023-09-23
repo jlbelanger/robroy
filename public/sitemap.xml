@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://robroy.jennybelanger.com/</loc><priority>1.0</priority></url>
+<url><loc>https://robroy.jennybelanger.com/installation.html</loc></url>
+<url><loc>https://robroy.jennybelanger.com/options.html</loc></url>
+<url><loc>https://robroy.jennybelanger.com/usage.html</loc></url>
 </urlset>

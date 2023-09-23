@@ -1,0 +1,81 @@
+{{#> ../partials/layout title='Options'}}
+<h2>Options</h2>
+
+<h3>SCSS</h3>
+
+<p>See <code><a href="https://github.com/jlbelanger/robroy/blob/main/scss/_variables.scss">scss/_variables.scss</a></code></p>
+
+<h3>JS</h3>
+
+<p>The following options should be passed to either <code>window.robroy({})</code> or <code>Robroy({})</code>. The default options are shown below.</p>
+
+{{{code "Robroy({
+	// The JS selector for elements that trigger the lightbox.
+	selector: '[data-robroy]',
+
+	// This class is added to the <body> element when the lightbox is visible.
+	bodyClass: 'robroy-open',
+
+	// This id attribute is added to the lightbox <dialog> element.
+	id: 'robroy',
+
+	// Set to true to prevent the escape key and left/right arrows from closing
+	// and navigating the lightbox.
+	disableKeyPressListener: false,
+
+	// Set to true to prevent the lightbox resizing when the browser window is resized.
+	disableResizeListener: false,
+
+	// How often to fire the resize event.
+	resizeDebounceMilliseconds: 100,
+
+	// If the screen width is less than this value, the lightbox will not appear.
+	// Set to false to show the lightbox on all screens.
+	minScreenWidth: 400,
+
+	// Set to true to prevent next/previous when the lightbox image itself is clicked.
+	disableImageClickListener: false,
+
+	// Maximum 0.5. When set to 0.5:
+	// - If the left 50% of the image is clicked, the previous image will be shown.
+	// - If the right 50% of the image is clicked, the next image will be shown.
+	// Decrease this value to trigger navigation when clicking further to the left/right.
+	imageClickListenerThreshold: 0.5,
+
+	// Set to true to prevent closing the lightbox when the dimmed background is clicked.
+	disableOverlayClickListener: false,
+
+	// Set to true to hide the close button.
+	hideCloseButton: false,
+
+	// Set to true to hide the full screen button.
+	hideFullScreenButton: false,
+
+	// Set to true to hide the previous and next buttons.
+	hideNavButtons: false,
+
+	// Set to true to hide the caption.
+	hideCaption: false,
+
+	// Set to true to hide the dimmed black background.
+	hideOverlay: false,
+
+	// Set to true to prevent <img> alt attributes from being used as captions.
+	disableAltCaptions: false,
+
+	// How often to check if the image has loaded.
+	imgLoadIntervalMilliseconds: 250,
+
+	// This class is added to the <dialog> while the lightbox is appearing.
+	animateInClass: 'robroy-fade-in',
+
+	// This class is added to the <dialog> while the lightbox is disappearing.
+	animateOutClass: 'robroy-fade-out',
+
+	// Set to true to allow navigating from the first image to the last image and vice-versa.
+	enableLoop: false,
+
+	// Set to true to show the current image number and the total number of images.
+	showNumber: false,
+});" 'js'}}}
+{{/../partials/layout}}

@@ -1,9 +1,27 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+
+function getPages(dir) {
+	let output = [];
+	const files = fs.readdirSync(dir);
+	files.forEach((filename) => {
+		const filePath = path.join(dir, filename);
+		const stat = fs.statSync(filePath);
+		if (filename.endsWith('.hbs') && !filename.startsWith('_')) {
+			output.push(filePath.replace(/^src\//, ''));
+		} else if (stat.isDirectory()) {
+			output = output.concat(getPages(filePath));
+		}
+	});
+	return output;
+}
+
+const pages = getPages('./src');
 
 module.exports = {
 	mode: 'production',
@@ -27,10 +45,11 @@ module.exports = {
 		path: path.resolve(__dirname, 'build'),
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			filename: 'index.html',
-			template: path.join('./src', 'index.hbs'),
-		}),
+		...pages.map((filename) => (new HtmlWebpackPlugin({
+			filename: filename.replace('.hbs', '.html'),
+			template: path.join('./src', filename),
+			templateParameters: { filename: filename.replace('.hbs', '.html') },
+		}))),
 		new MiniCssExtractPlugin({
 			filename: '[name].min.css?[contenthash]',
 		}),
@@ -54,8 +73,9 @@ module.exports = {
 			files: [
 				'helpers/**/*',
 				'js/**/*',
+				'partials/**/*',
 				'scss/**/*',
-				'src/**/*',
+				'src/**/*.hbs',
 			],
 			snippetOptions: {
 				rule: {

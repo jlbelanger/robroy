@@ -1,3 +1,5 @@
+import highlightJs from './highlightJs';
+
 export default (html) => {
 	let output = html;
 	output = output.replace(/&lt;([^/& ]+)([& ])/g, '&lt;[span code__element]$1[/span]$2');
@@ -7,5 +9,10 @@ export default (html) => {
 
 	output = output.replace(/\[span (.+?)\]/g, '<span class="$1">');
 	output = output.replace(/\[\/span\]/g, '</span>');
+
+	if (output.includes('>script')) {
+		return highlightJs(output);
+	}
+
 	return output;
 };
