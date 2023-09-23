@@ -17,7 +17,7 @@
 		"lint": "yarn lint:css && yarn lint:js",
 		"lint:css": "node_modules/.bin/stylelint 'scss/**/*.scss'",
 		"lint:js": "node_modules/.bin/eslint . --ext .js",
-		"start": "npx browserslist@latest --update-db && node_modules/.bin/webpack serve"
+		"start": "npx update-browserslist-db@latest && node_modules/.bin/webpack serve"
 	},
 	"dependencies": {},
 	"devDependencies": {
