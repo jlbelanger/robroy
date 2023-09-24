@@ -79,6 +79,14 @@ In the `robroy` folder, run:
 yarn build
 ```
 
+## Deployment
+
+Note: The deploy script included in this repo depends on other scripts that only exist in my private repos. If you want to deploy this repo, you'll have to create your own script.
+
+``` bash
+./deploy.sh
+```
+
 ## Credits
 
 - Debounce: https://davidwalsh.name/javascript-debounce-function
