@@ -1,7 +1,7 @@
 {
 	"name": "@jlbelanger/robroy",
 	"version": "1.0.0",
-	"description": "Lightbox.",
+	"description": "Vanilla JavaScript photo lightbox.",
 	"license": "GPL-3.0-only",
 	"author": {
 		"name": "Jenny Belanger",

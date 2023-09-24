@@ -1,5 +1,7 @@
 # Robroy Lightbox
 
+Robroy is a vanilla JavaScript photo lightbox. [View the demo](https://robroy.jennybelanger.com/).
+
 ## Features
 
 - The basics
@@ -26,6 +28,18 @@
 	- Full screen mode
 	- Loop
 	- Image number
+
+## Install
+
+**Warning: This package is still a work-in-progress. Use at your own risk.**
+
+```bash
+# With npm:
+npm install --save https://github.com/jlbelanger/robroy
+
+# Or with yarn:
+yarn add https://github.com/jlbelanger/robroy
+```
 
 ## Configuration
 
@@ -57,23 +71,19 @@ yarn install
 
 ### Run
 
-In the `robroy` folder, run:
-
 ``` bash
 yarn start
 ```
 
-### Lint
+Your browser should automatically open https://localhost:3000/
 
-In the `robroy` folder, run:
+### Lint
 
 ``` bash
 yarn lint
 ```
 
 ### Package
-
-In the `robroy` folder, run:
 
 ``` bash
 yarn build
