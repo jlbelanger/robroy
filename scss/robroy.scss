@@ -16,7 +16,7 @@
 	position: fixed;
 	right: 0;
 	top: 0;
-	z-index: $robroy-z-index;
+	z-index: $robroy-zindex;
 
 	&::backdrop {
 		background: transparent;
@@ -65,7 +65,7 @@
 .robroy__figure {
 	margin: 0;
 	position: relative;
-	z-index: $robroy-figure-z-index;
+	z-index: $robroy-figure-zindex;
 }
 
 .robroy__overlay {
@@ -98,7 +98,7 @@
 	padding: $robroy-number-padding;
 	position: fixed;
 	right: 0;
-	z-index: $robroy-number-z-index;
+	z-index: $robroy-number-zindex;
 }
 
 .robroy__button {
@@ -206,7 +206,7 @@
 		right: 50%;
 		top: 50%;
 		width: $robroy-loading-size;
-		z-index: $robroy-loading-z-index;
+		z-index: $robroy-loading-zindex;
 	}
 
 	.robroy__button,
