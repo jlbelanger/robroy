@@ -334,14 +334,14 @@ const Robroy = {
 			const $prevButton = $container.querySelector('.robroy__button--prev');
 			const $nextButton = $container.querySelector('.robroy__button--next');
 			if (Robroy.currentIndex <= 0) {
-				$prevButton.style.display = 'none';
+				$prevButton.classList.add('robroy-hide');
 			} else {
-				$prevButton.style.display = '';
+				$prevButton.classList.remove('robroy-hide');
 			}
 			if (Robroy.currentIndex >= (Robroy.numImages - 1)) {
-				$nextButton.style.display = 'none';
+				$nextButton.classList.add('robroy-hide');
 			} else {
-				$nextButton.style.display = '';
+				$nextButton.classList.remove('robroy-hide');
 			}
 		}
 
@@ -373,10 +373,10 @@ const Robroy = {
 		const $figcaption = $container.querySelector('.robroy__caption');
 		const caption = Robroy.getCaption($thumbnail);
 		if (caption) {
-			$figcaption.style.display = '';
+			$figcaption.classList.remove('robroy-hide');
 			$figcaption.innerHTML = caption;
 		} else {
-			$figcaption.style.display = 'none';
+			$figcaption.classList.add('robroy-hide');
 			$figcaption.innerText = '';
 		}
 
