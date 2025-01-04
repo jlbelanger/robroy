@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables';
 
 .robroy-open {
 	overflow: hidden;
@@ -13,7 +13,7 @@
 	justify-content: center;
 	padding: 0;
 	position: fixed;
-	z-index: $robroy-zindex;
+	z-index: var(--robroy-zindex);
 
 	&::backdrop {
 		background: transparent;
@@ -21,7 +21,7 @@
 }
 
 .robroy-fade-in {
-	animation: robroy-fade-in $robroy-fade-in-duration forwards ease-in-out;
+	animation: robroy-fade-in var(--robroy-fade-in-duration) forwards ease-in-out;
 	opacity: 0;
 
 	@media (prefers-reduced-motion) {
@@ -41,7 +41,7 @@
 }
 
 .robroy-fade-out {
-	animation: robroy-fade-out $robroy-fade-out-duration forwards ease-in-out;
+	animation: robroy-fade-out var(--robroy-fade-out-duration) forwards ease-in-out;
 	opacity: 1;
 
 	@media (prefers-reduced-motion) {
@@ -62,11 +62,11 @@
 .robroy__figure {
 	margin: 0;
 	position: relative;
-	z-index: $robroy-figure-zindex;
+	z-index: var(--robroy-figure-zindex);
 }
 
 .robroy__overlay {
-	background-color: $robroy-overlay-background;
+	background-color: var(--robroy-overlay-background);
 	cursor: pointer;
 	inset: 0;
 	position: fixed;
@@ -79,39 +79,39 @@
 }
 
 .robroy__caption {
-	color: $robroy-caption-color;
-	font-size: $robroy-caption-font-size;
-	line-height: $robroy-caption-line-height;
-	margin-top: $robroy-caption-margin-top;
-	min-width: $robroy-caption-min-width;
+	color: var(--robroy-caption-color);
+	font-size: var(--robroy-caption-font-size);
+	line-height: var(--robroy-caption-line-height);
+	margin-top: var(--robroy-caption-margin-top);
+	min-width: var(--robroy-caption-min-width);
 }
 
 .robroy__number {
 	bottom: 0;
-	color: $robroy-number-color;
-	padding: $robroy-number-padding;
+	color: var(--robroy-number-color);
+	padding: var(--robroy-number-padding);
 	position: fixed;
 	right: 0;
-	z-index: $robroy-number-zindex;
+	z-index: var(--robroy-number-zindex);
 }
 
 .robroy__button {
-	background: $robroy-button-background-color;
+	background: var(--robroy-button-background-color);
 	border-radius: 0;
 	border-width: 0;
 	cursor: pointer;
 	font-size: 0;
-	height: $robroy-icon-size;
+	height: var(--robroy-icon-size);
 	line-height: 1;
 	margin: 0;
 	padding: 0;
 	position: absolute;
-	width: $robroy-icon-size;
+	width: var(--robroy-icon-size);
 
 	&:hover,
 	&:active,
 	&:focus {
-		background: $robroy-button-background-color;
+		background: var(--robroy-button-background-color);
 	}
 }
 
@@ -121,48 +121,49 @@
 	top: 0;
 
 	&::after {
-		color: $robroy-close-color;
-		content: $robroy-close-content;
+		color: var(--robroy-close-color);
+		content: var(--robroy-close-content);
 		display: block;
-		font-family: $robroy-close-font-family;
-		font-size: $robroy-close-font-size;
-		font-weight: $robroy-close-font-weight;
+		font-family: var(--robroy-close-font-family);
+		font-size: var(--robroy-close-font-size);
+		font-weight: var(--robroy-close-font-weight);
 	}
 }
 
 .robroy__button--full-screen {
 	position: fixed;
-	right: $robroy-icon-size;
+	right: var(--robroy-icon-size);
 	top: 0;
 
 	&::before {
-		background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path fill="rgba(#{red($robroy-full-screen-color)},#{green($robroy-full-screen-color)},#{blue($robroy-full-screen-color)},#{alpha($robroy-full-screen-color)})" d="M0 0v20h10V10h10V0H0zM30 0v10h10v10h10V0H30zM0 50h20V40H10V30H0v10zM50 50H30V40h10V30h10v10z"/></svg>');
-		background-repeat: no-repeat;
+		background: var(--robroy-full-screen-color);
 		content: '';
 		display: block;
-		height: $robroy-full-screen-size;
-		margin-right: #{$robroy-full-screen-size * -.5};
-		margin-top: #{$robroy-full-screen-size * -.5};
+		height: var(--robroy-full-screen-size);
+		margin-right: calc(var(--robroy-full-screen-size) * -.5);
+		margin-top: calc(var(--robroy-full-screen-size) * -.5);
+		mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0 0v20h10V10h10V0H0zM30 0v10h10v10h10V0H30zM0 50h20V40H10V30H0v10zM50 50H30V40h10V30h10v10z"/></svg>');
+		mask-repeat: no-repeat;
 		position: absolute;
 		right: 50%;
 		top: 50%;
-		width: $robroy-full-screen-size;
+		width: var(--robroy-full-screen-size);
 	}
 }
 
 .robroy__button--nav {
-	margin-top: #{$robroy-icon-size * -.5};
+	margin-top: calc(var(--robroy-icon-size) * -.5);
 	position: fixed;
 	top: 50%;
 
 	&::after {
 		border-style: solid;
-		border-width: $robroy-arrow-size;
+		border-width: var(--robroy-arrow-size);
 		content: '';
 		display: flex;
-		left: #{($robroy-icon-size - ($robroy-arrow-size * 2)) * .5};
+		left: calc((var(--robroy-icon-size) - (var(--robroy-arrow-size) * 2)) * .5);
 		position: absolute;
-		top: #{($robroy-icon-size - ($robroy-arrow-size * 2)) * .5};
+		top: calc((var(--robroy-icon-size) - (var(--robroy-arrow-size) * 2)) * .5);
 	}
 }
 
@@ -170,8 +171,8 @@
 	left: 0;
 
 	&::after {
-		border-color: transparent $robroy-arrow-color transparent transparent;
-		margin-left: #{$robroy-arrow-size * -.5};
+		border-color: transparent var(--robroy-arrow-color) transparent transparent;
+		margin-left: calc(var(--robroy-arrow-size) * -.5);
 	}
 }
 
@@ -179,28 +180,28 @@
 	right: 0;
 
 	&::after {
-		border-color: transparent transparent transparent $robroy-arrow-color;
-		margin-left: #{$robroy-arrow-size * .5};
+		border-color: transparent transparent transparent var(--robroy-arrow-color);
+		margin-left: calc(var(--robroy-arrow-size) * .5);
 	}
 }
 
 .robroy--loading {
 	&::after {
-		animation: robroy-spin $robroy-loading-duration infinite linear;
-		border-color: $robroy-loading-color $robroy-loading-color $robroy-loading-color transparent;
+		animation: robroy-spin var(--robroy-loading-duration) infinite linear;
+		border-color: var(--robroy-loading-color) var(--robroy-loading-color) var(--robroy-loading-color) transparent;
 		border-radius: 100px;
 		border-style: solid;
-		border-width: $robroy-loading-width;
+		border-width: var(--robroy-loading-width);
 		content: '';
 		display: block;
-		height: $robroy-loading-size;
-		margin-right: #{$robroy-loading-size * -.5};
-		margin-top: #{$robroy-loading-size * -.5};
+		height: var(--robroy-loading-size);
+		margin-right: calc(var(--robroy-loading-size) * -.5);
+		margin-top: calc(var(--robroy-loading-size) * -.5);
 		position: absolute;
 		right: 50%;
 		top: 50%;
-		width: $robroy-loading-size;
-		z-index: $robroy-loading-zindex;
+		width: var(--robroy-loading-size);
+		z-index: var(--robroy-loading-zindex);
 	}
 
 	.robroy__button,

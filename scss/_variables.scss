@@ -1,42 +1,56 @@
-$robroy-black: #000 !default;
-$robroy-white: #fff !default;
+:root {
+	/* Colors. */
+	--robroy-black: #000;
+	--robroy-white: #fff;
 
-$robroy-arrow-color: $robroy-white !default;
-$robroy-arrow-size: 10px !default;
+	/* Arrows. */
+	--robroy-arrow-color: var(--robroy-white);
+	--robroy-arrow-size: 10px;
 
-$robroy-button-background-color: transparent !default;
+	/* Buttons. */
+	--robroy-button-background-color: transparent;
 
-$robroy-caption-color: $robroy-white !default;
-$robroy-caption-font-size: 16px !default;
-$robroy-caption-line-height: 1.4 !default;
-$robroy-caption-margin-top: 4px !default;
-$robroy-caption-min-width: 300px !default;
+	/* Captions. */
+	--robroy-caption-color: var(--robroy-white);
+	--robroy-caption-font-size: 16px;
+	--robroy-caption-line-height: 1.4;
+	--robroy-caption-margin-top: 4px;
+	--robroy-caption-min-width: 300px;
 
-$robroy-close-color: $robroy-white !default;
-$robroy-close-content: '\00d7' !default;
-$robroy-close-font-family: serif !default;
-$robroy-close-font-size: 32px !default;
-$robroy-close-font-weight: bold !default;
+	/* Close. */
+	--robroy-close-color: var(--robroy-white);
+	--robroy-close-content: '\00d7'; /* &times; */
+	--robroy-close-font-family: serif;
+	--robroy-close-font-size: 32px;
+	--robroy-close-font-weight: bold;
 
-$robroy-fade-in-duration: 300ms !default;
-$robroy-fade-out-duration: 300ms !default;
+	/* Fades. */
+	--robroy-fade-in-duration: 300ms;
+	--robroy-fade-out-duration: 300ms;
 
-$robroy-full-screen-size: 20px !default;
-$robroy-full-screen-color: $robroy-white !default;
+	/* Full screen. */
+	--robroy-full-screen-size: 20px;
+	--robroy-full-screen-color: var(--robroy-white);
 
-$robroy-icon-size: 44px !default;
+	/* Icons. */
+	--robroy-icon-size: 44px;
 
-$robroy-loading-color: $robroy-white !default;
-$robroy-loading-duration: 2s !default;
-$robroy-loading-size: 32px !default;
-$robroy-loading-width: 6px !default;
+	/* Loading. */
+	--robroy-loading-color: var(--robroy-white);
+	--robroy-loading-duration: 2s;
+	--robroy-loading-size: 32px;
+	--robroy-loading-width: 6px;
 
-$robroy-number-color: $robroy-white !default;
-$robroy-number-padding: 4px !default;
+	/* Numbers. */
+	--robroy-number-color: var(--robroy-white);
+	--robroy-number-padding: 4px;
 
-$robroy-overlay-background: rgba($robroy-black, .9) !default;
+	/* Overlays. */
+	--robroy-overlay-background: hsl(from var(--robroy-black) h s l / .9);
 
-$robroy-figure-zindex: 9998 !default;
-$robroy-number-zindex: 9998 !default;
-$robroy-zindex: 9997 !default;
-$robroy-loading-zindex: 9995 !default;
+	/* Z-indexes. */
+	--robroy-figure-zindex: 9998;
+	--robroy-number-zindex: 9998;
+	--robroy-zindex: 9997;
+	--robroy-loading-zindex: 9995;
+}

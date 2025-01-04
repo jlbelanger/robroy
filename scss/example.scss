@@ -1,6 +1,8 @@
-$focus: 0 0 0 4px turquoise;
-$skip-width: 250px;
-$button-size: 44px;
+:root {
+	--focus: 0 0 0 4px turquoise;
+	--skip-width: 250px;
+	--button-size: 44px;
+}
 
 body {
 	background: #fff;
@@ -59,8 +61,8 @@ img {
 }
 
 :focus {
-	box-shadow: $focus;
-	outline: none !important; // stylelint-disable-line declaration-no-important
+	box-shadow: var(--focus);
+	outline: none !important; /* stylelint-disable-line declaration-no-important */
 }
 
 .robroy__caption a {
@@ -95,10 +97,10 @@ p {
 button {
 	background: #ccc;
 	border-color:
-		scale-color(#ccc, $lightness: 25%)
-		scale-color(#ccc, $lightness: -25%)
-		scale-color(#ccc, $lightness: -25%)
-		scale-color(#ccc, $lightness: 25%);
+		hsl(from #ccc h s 85%)
+		hsl(from #ccc h s 60%)
+		hsl(from #ccc h s 60%)
+		hsl(from #ccc h s 85%);
 	border-style: solid;
 	border-width: 2px 3px 3px 2px;
 	color: #000;
@@ -160,22 +162,22 @@ button {
 	color: #000;
 	font-size: 20px;
 	font-weight: bold;
-	height: $button-size;
+	height: var(--button-size);
 	left: 50%;
-	line-height: $button-size;
-	margin-left: #{$skip-width * -.5};
+	line-height: var(--button-size);
+	margin-left: calc(var(--skip-width) * -.5);
 	opacity: 0;
 	padding: 0;
 	position: absolute;
 	text-align: center;
 	text-decoration: none;
-	top: -$button-size;
-	width: $skip-width;
+	top: calc(var(--button-size) * -1);
+	width: var(--skip-width);
 	z-index: 999;
 
 	&:active,
 	&:focus {
-		box-shadow: 0 0 10px 5px rgba(#000, .2), $focus;
+		box-shadow: 0 0 10px 5px rgba(#000, .2), var(--focus);
 		opacity: 1;
 		top: 0;
 	}
