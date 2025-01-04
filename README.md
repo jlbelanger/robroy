@@ -47,9 +47,9 @@ yarn add https://github.com/jlbelanger/robroy
 
 JS configuration options are defined in [`src/js/robroy.js`](https://github.com/jlbelanger/robroy/blob/main/src/js/robroy.js). To override these settings, pass them to `robroy({})` in your JS code.
 
-### SCSS
+### SSS
 
-SCSS configuration options are defined in [`src/scss/_variables.scss`](https://github.com/jlbelanger/robroy/blob/main/scss/_variables.scss). To override these settings, re-define the variables in your SCSS file.
+CSS variables are defined in [`src/scss/_variables.scss`](https://github.com/jlbelanger/robroy/blob/main/scss/_variables.scss). To override these settings, re-define the variables in your CSS file.
 
 ## Development
 
