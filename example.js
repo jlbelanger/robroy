@@ -1,4 +1,4 @@
-import './scss/example.scss';
+import './css/example.css';
 
 window.addEventListener('load', () => {
 	window.robroy();

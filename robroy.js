@@ -1,4 +1,4 @@
-import './scss/robroy.scss';
+import './css/robroy.css';
 import Robroy from './js/robroy';
 
 const fn = (args) => {

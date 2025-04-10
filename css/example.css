@@ -2,11 +2,14 @@
 	--focus: 0 0 0 4px turquoise;
 	--skip-width: 250px;
 	--button-size: 44px;
+	--black: #000;
+	--gray: #ccc;
+	--white: #fff;
 }
 
 body {
-	background: #fff;
-	color: #000;
+	background: var(--white);
+	color: var(--black);
 	font-family: sans-serif;
 	margin: 0 auto;
 	max-width: 800px;
@@ -14,7 +17,7 @@ body {
 }
 
 body::backdrop {
-	background: #fff;
+	background: var(--white);
 }
 
 #nav {
@@ -30,7 +33,7 @@ body::backdrop {
 }
 
 .active a {
-	color: #000;
+	color: var(--black);
 	text-decoration: none;
 }
 
@@ -66,7 +69,7 @@ img {
 }
 
 .robroy__caption a {
-	color: #fff;
+	color: var(--white);
 }
 
 figcaption {
@@ -95,15 +98,15 @@ p {
 }
 
 button {
-	background: #ccc;
+	background: var(--gray);
 	border-color:
-		hsl(from #ccc h s 85%)
-		hsl(from #ccc h s 60%)
-		hsl(from #ccc h s 60%)
-		hsl(from #ccc h s 85%);
+		hsl(from var(--gray) h s 85%)
+		hsl(from var(--gray) h s 60%)
+		hsl(from var(--gray) h s 60%)
+		hsl(from var(--gray) h s 85%);
 	border-style: solid;
 	border-width: 2px 3px 3px 2px;
-	color: #000;
+	color: var(--black);
 	cursor: pointer;
 	font-family: sans-serif;
 	font-size: 1rem;
@@ -112,8 +115,8 @@ button {
 
 .code {
 	background: #111;
-	border: 1px solid #000;
-	color: #fff;
+	border: 1px solid var(--black);
+	color: var(--white);
 	display: block;
 	margin: .25rem 0 0;
 	padding: 1rem;
@@ -156,10 +159,10 @@ button {
 }
 
 #skip {
-	background: #ccc;
+	background: var(--gray);
 	border: 0;
 	border-radius: 0;
-	color: #000;
+	color: var(--black);
 	font-size: 20px;
 	font-weight: bold;
 	height: var(--button-size);
@@ -177,7 +180,7 @@ button {
 
 	&:active,
 	&:focus {
-		box-shadow: 0 0 10px 5px rgba(#000, .2), var(--focus);
+		box-shadow: 0 0 10px 5px hsl(from var(--black) h s l / 20%), var(--focus);
 		opacity: 1;
 		top: 0;
 	}
