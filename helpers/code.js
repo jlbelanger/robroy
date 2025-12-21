@@ -1,9 +1,9 @@
-import clean from './clean';
-import escape from './escape';
-import highlightCss from './highlightCss';
-import highlightHtml from './highlightHtml';
-import highlightJs from './highlightJs';
-import highlightSh from './highlightSh';
+import clean from './clean.js';
+import escape from './escape.js';
+import highlightCss from './highlightCss.js';
+import highlightHtml from './highlightHtml.js';
+import highlightJs from './highlightJs.js';
+import highlightSh from './highlightSh.js';
 
 export default (input, lang = '') => {
 	let cleaned = '';

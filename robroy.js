@@ -1,5 +1,5 @@
 import './css/robroy.css';
-import Robroy from './js/robroy';
+import Robroy from './js/robroy.js';
 
 const fn = (args) => {
 	Robroy.init(args);

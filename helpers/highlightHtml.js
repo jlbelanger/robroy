@@ -1,4 +1,4 @@
-import highlightJs from './highlightJs';
+import highlightJs from './highlightJs.js';
 
 export default (html) => {
 	let output = html;
