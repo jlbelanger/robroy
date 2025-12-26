@@ -1,19 +1,18 @@
 // https://davidwalsh.name/javascript-debounce-function
 export default (func, wait, immediate) => {
 	let timeout;
-	return function (...args) {
-		const context = this;
+	return (...args) => {
 		const later = () => {
 			timeout = null;
 			if (!immediate) {
-				func.apply(context, args);
+				func(...args);
 			}
 		};
 		const callNow = immediate && !timeout;
 		clearTimeout(timeout);
 		timeout = setTimeout(later, wait);
 		if (callNow) {
-			func.apply(context, args);
+			func(...args);
 		}
 	};
 };

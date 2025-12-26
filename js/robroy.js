@@ -7,7 +7,7 @@ const Robroy = {
 	currentIndex: null,
 	isInited: false,
 	numImages: 0,
-	init: (args) => {
+	init: (args) => { // eslint-disable-line complexity
 		args = args || {};
 		args.selector = args.disableKeyPressListener || '[data-robroy]';
 		args.bodyClass = args.bodyClass || 'robroy-open';
@@ -291,10 +291,10 @@ const Robroy = {
 		Robroy.setImage($thumbnail);
 	},
 	fullScreen: () => {
-		if (!document.fullscreenElement) {
-			document.body.requestFullscreen();
-		} else {
+		if (document.fullscreenElement) {
 			document.exitFullscreen();
+		} else {
+			document.body.requestFullscreen();
 		}
 	},
 	getCaption: ($thumbnail) => {
