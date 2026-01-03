@@ -34,11 +34,7 @@ Robroy is a vanilla JavaScript photo lightbox. [View the demo](https://robroy.je
 **Warning: This package is still a work-in-progress. Use at your own risk.**
 
 ```bash
-# With npm:
 npm install --save https://github.com/jlbelanger/robroy
-
-# Or with yarn:
-yarn add https://github.com/jlbelanger/robroy
 ```
 
 ## Configuration
@@ -56,7 +52,7 @@ CSS variables are defined in [`src/css/style.css`](https://github.com/jlbelanger
 ### Requirements
 
 - [Git](https://git-scm.com/)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- [Node](https://nodejs.org/)
 
 ### Setup
 
@@ -66,13 +62,13 @@ git clone https://github.com/jlbelanger/robroy.git
 cd robroy
 
 # Install dependencies
-yarn install
+npm install
 ```
 
 ### Run
 
 ``` bash
-yarn start
+npm start
 ```
 
 Your browser should automatically open https://localhost:3000/
@@ -80,13 +76,13 @@ Your browser should automatically open https://localhost:3000/
 ### Lint
 
 ``` bash
-yarn lint
+npm run lint
 ```
 
 ### Package
 
 ``` bash
-yarn build
+npm run build
 ```
 
 ## Deployment

@@ -14,11 +14,11 @@
 		"url": "https://github.com/jlbelanger/robroy.git"
 	},
 	"scripts": {
-		"build": "rm -rf build/ && node_modules/.bin/webpack --mode=production && mkdir -p dist && cp build/robroy.* dist",
-		"lint": "yarn lint:css && yarn lint:js",
-		"lint:css": "node_modules/.bin/stylelint 'css/**/*.css'",
-		"lint:js": "node_modules/.bin/eslint .",
-		"start": "node_modules/.bin/update-browserslist-db && node_modules/.bin/webpack serve"
+		"build": "rm -rf build/ && npx webpack --mode=production && mkdir -p dist && cp build/robroy.* dist",
+		"lint": "npm run lint:css && npm run lint:js",
+		"lint:css": "npx stylelint 'css/**/*.css'",
+		"lint:js": "npx eslint .",
+		"start": "npx update-browserslist-db && npx webpack serve"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.26.0",
