@@ -7,7 +7,8 @@ const Robroy = {
 	currentIndex: null,
 	isInited: false,
 	numImages: 0,
-	init: (args) => { // eslint-disable-line complexity
+	// eslint-disable-next-line complexity
+	init: (args) => {
 		args = args || {};
 		args.selector = args.disableKeyPressListener || '[data-robroy]';
 		args.bodyClass = args.bodyClass || 'robroy-open';
@@ -56,20 +57,24 @@ const Robroy = {
 
 		// Add key press listener.
 		if (!args.disableKeyPressListener) {
-			document.addEventListener('keydown', (e) => {
-				const $container = document.getElementById(Robroy.args.id);
-				if (!$container) {
-					return;
-				}
+			document.addEventListener(
+				'keydown',
+				(e) => {
+					const $container = document.getElementById(Robroy.args.id);
+					if (!$container) {
+						return;
+					}
 
-				if (e.key === 'ArrowRight') {
-					Robroy.next();
-				} else if (e.key === 'ArrowLeft') {
-					Robroy.previous();
-				} else if (e.key === 'Escape') {
-					Robroy.close();
-				}
-			}, false);
+					if (e.key === 'ArrowRight') {
+						Robroy.next();
+					} else if (e.key === 'ArrowLeft') {
+						Robroy.previous();
+					} else if (e.key === 'Escape') {
+						Robroy.close();
+					}
+				},
+				false,
+			);
 		}
 
 		// Add window resize listener.
@@ -107,10 +112,10 @@ const Robroy = {
 	onClickImage: (e) => {
 		const imageWidth = e.target.width;
 		const threshold = imageWidth * Robroy.args.imageClickListenerThreshold;
-		if (e.offsetX <= threshold) {
-			Robroy.previous();
-		} else if (e.offsetX >= (imageWidth - threshold)) {
+		if (e.offsetX >= imageWidth - threshold) {
 			Robroy.next();
+		} else if (e.offsetX <= threshold) {
+			Robroy.previous();
 		}
 	},
 	onResize: () => {
@@ -264,7 +269,7 @@ const Robroy = {
 		let i = Robroy.currentIndex + 1;
 
 		// Do not allow going past the last image.
-		if (Robroy.currentIndex >= (Robroy.numImages - 1)) {
+		if (Robroy.currentIndex >= Robroy.numImages - 1) {
 			if (!Robroy.args.enableLoop) {
 				return;
 			}
@@ -338,7 +343,7 @@ const Robroy = {
 			} else {
 				$prevButton.classList.remove('robroy-hide');
 			}
-			if (Robroy.currentIndex >= (Robroy.numImages - 1)) {
+			if (Robroy.currentIndex >= Robroy.numImages - 1) {
 				$nextButton.classList.add('robroy-hide');
 			} else {
 				$nextButton.classList.remove('robroy-hide');
@@ -460,9 +465,7 @@ const Robroy = {
 			}
 		}
 	},
-	getMargin: () => (
-		Math.round(window.innerHeight * 0.1)
-	),
+	getMargin: () => Math.round(window.innerHeight * 0.1),
 };
 
 export default Robroy;

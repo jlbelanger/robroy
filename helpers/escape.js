@@ -1,1 +1,1 @@
-export default (html) => (html.replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+export default (html) => html.replace(/</g, '&lt;').replace(/>/g, '&gt;');

@@ -5,29 +5,29 @@ Robroy is a vanilla JavaScript photo lightbox. [View the demo](https://robroy.je
 ## Features
 
 - The basics
-	- Previous, next, and close buttons
-	- Captions
-	- Loading icon
+  - Previous, next, and close buttons
+  - Captions
+  - Loading icon
 - No dependencies
-	- Vanilla JS (no jQuery required)
-	- No images, icons, or fonts required
+  - Vanilla JS (no jQuery required)
+  - No images, icons, or fonts required
 - Accessibility
-	- Responsive and mobile-friendly
-		- Large images shrink to fit on the screen
-	- Works on Chrome, Firefox, and Safari
-	- Screenreader friendly
-	- Keyboard accessible
-		- Left/right arrows show the previous or next image
-		- Escape key closes the lightbox and returns focus to previously activated element
-	- Sensible fallback behaviour when JS is disabled
-	- Command/Ctrl clicking the thumbnail opens the image in a new tab rather than opening the lightbox
+  - Responsive and mobile-friendly
+    - Large images shrink to fit on the screen
+  - Works on Chrome, Firefox, and Safari
+  - Screenreader friendly
+  - Keyboard accessible
+    - Left/right arrows show the previous or next image
+    - Escape key closes the lightbox and returns focus to previously activated element
+  - Sensible fallback behaviour when JS is disabled
+  - Command/Ctrl clicking the thumbnail opens the image in a new tab rather than opening the lightbox
 - Extras
-	- Clicking on the left side of the image shows the previous image; clicking on the right side of the image shows the next image
-	- Clicking outside of the lightbox closes the lightbox
-	- Disables body scrolling when lightbox is open
-	- Full screen mode
-	- Loop
-	- Image number
+  - Clicking on the left side of the image shows the previous image; clicking on the right side of the image shows the next image
+  - Clicking outside of the lightbox closes the lightbox
+  - Disables body scrolling when lightbox is open
+  - Full screen mode
+  - Loop
+  - Image number
 
 ## Install
 
@@ -56,7 +56,7 @@ CSS variables are defined in [`src/css/style.css`](https://github.com/jlbelanger
 
 ### Setup
 
-``` bash
+```bash
 # Clone the repo
 git clone https://github.com/jlbelanger/robroy.git
 cd robroy
@@ -67,7 +67,7 @@ npm install
 
 ### Run
 
-``` bash
+```bash
 npm start
 ```
 
@@ -75,13 +75,13 @@ Your browser should automatically open https://localhost:3000/
 
 ### Lint
 
-``` bash
+```bash
 npm run lint
 ```
 
 ### Package
 
-``` bash
+```bash
 npm run build
 ```
 
@@ -89,7 +89,7 @@ npm run build
 
 Note: The deploy script included in this repo depends on other scripts that only exist in my private repos. If you want to deploy this repo, you'll have to create your own script.
 
-``` bash
+```bash
 ./deploy.sh
 ```
 

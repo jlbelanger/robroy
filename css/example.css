@@ -73,7 +73,7 @@ img {
 }
 
 figcaption {
-	margin-top: .25rem;
+	margin-top: 0.25rem;
 }
 
 figcaption > :first-child {
@@ -86,11 +86,11 @@ h1 {
 
 h2,
 h3 {
-	margin: 2rem 0 .25rem;
+	margin: 2rem 0 0.25rem;
 }
 
 h2 + h3 {
-	margin-top: .5rem;
+	margin-top: 0.5rem;
 }
 
 p {
@@ -99,6 +99,8 @@ p {
 
 button {
 	background: var(--gray);
+
+	/* prettier-ignore */
 	border-color:
 		hsl(from var(--gray) h s 85%)
 		hsl(from var(--gray) h s 60%)
@@ -110,7 +112,7 @@ button {
 	cursor: pointer;
 	font-family: sans-serif;
 	font-size: 1rem;
-	padding: .5rem;
+	padding: 0.5rem;
 }
 
 .code {
@@ -118,7 +120,7 @@ button {
 	border: 1px solid var(--black);
 	color: var(--white);
 	display: block;
-	margin: .25rem 0 0;
+	margin: 0.25rem 0 0;
 	padding: 1rem;
 
 	p + & {
@@ -168,7 +170,7 @@ button {
 	height: var(--button-size);
 	left: 50%;
 	line-height: var(--button-size);
-	margin-left: calc(var(--skip-width) * -.5);
+	margin-left: calc(var(--skip-width) * -0.5);
 	opacity: 0;
 	padding: 0;
 	position: absolute;
@@ -180,7 +182,9 @@ button {
 
 	&:active,
 	&:focus {
-		box-shadow: 0 0 10px 5px hsl(from var(--black) h s l / 20%), var(--focus);
+		box-shadow:
+			0 0 10px 5px hsl(from var(--black) h s l / 20%),
+			var(--focus);
 		opacity: 1;
 		top: 0;
 	}

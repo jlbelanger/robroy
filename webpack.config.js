@@ -46,11 +46,14 @@ export default {
 		path: path.resolve(process.cwd(), 'build'),
 	},
 	plugins: [
-		...pages.map((filename) => (new HtmlWebpackPlugin({
-			filename: filename.replace('.hbs', '.html'),
-			template: path.join('./src', filename),
-			templateParameters: { filename: filename.replace('.hbs', '.html') },
-		}))),
+		...pages.map(
+			(filename) =>
+				new HtmlWebpackPlugin({
+					filename: filename.replace('.hbs', '.html'),
+					template: path.join('./src', filename),
+					templateParameters: { filename: filename.replace('.hbs', '.html') },
+				}),
+		),
 		new MiniCssExtractPlugin({
 			filename: '[name].min.css?[contenthash]',
 		}),
@@ -68,28 +71,24 @@ export default {
 				concurrency: 100,
 			},
 		}),
-		new BrowserSyncPlugin({
-			proxy: 'https://localhost:8080',
-			port: 3000,
-			files: [
-				'helpers/**/*',
-				'js/**/*',
-				'partials/**/*',
-				'css/**/*',
-				'src/**/*.hbs',
-			],
-			snippetOptions: {
-				rule: {
-					match: /<body[^>]*>/i,
-					fn: (snippet, match) => (
-						// Allow Browsersync to work with Content-Security-Policy without script-src 'unsafe-inline'.
-						`${match}${snippet.replace('id=', 'nonce="browser-sync" id=')}`
-					),
+		new BrowserSyncPlugin(
+			{
+				proxy: 'https://localhost:8080',
+				port: 3000,
+				files: ['helpers/**/*', 'js/**/*', 'partials/**/*', 'css/**/*', 'src/**/*.hbs'],
+				snippetOptions: {
+					rule: {
+						match: /<body[^>]*>/i,
+						fn: (snippet, match) =>
+							// Allow Browsersync to work with Content-Security-Policy without script-src 'unsafe-inline'.
+							`${match}${snippet.replace('id=', 'nonce="browser-sync" id=')}`,
+					},
 				},
 			},
-		}, {
-			reload: false,
-		}),
+			{
+				reload: false,
+			},
+		),
 	],
 	module: {
 		rules: [
@@ -123,9 +122,7 @@ export default {
 						loader: 'postcss-loader',
 						options: {
 							postcssOptions: {
-								plugins: [
-									'postcss-preset-env',
-								],
+								plugins: ['postcss-preset-env'],
 							},
 						},
 					},
@@ -151,13 +148,13 @@ export default {
 				example: {
 					name: 'example',
 					type: 'css/mini-extract',
-					chunks: (chunk) => (chunk.name === 'example'),
+					chunks: (chunk) => chunk.name === 'example',
 					enforce: true,
 				},
 				robroy: {
 					name: 'robroy',
 					type: 'css/mini-extract',
-					chunks: (chunk) => (chunk.name === 'robroy'),
+					chunks: (chunk) => chunk.name === 'robroy',
 					enforce: true,
 				},
 			},

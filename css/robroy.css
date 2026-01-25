@@ -195,8 +195,8 @@
 		content: '';
 		display: block;
 		height: var(--robroy-full-screen-size);
-		margin-right: calc(var(--robroy-full-screen-size) * -.5);
-		margin-top: calc(var(--robroy-full-screen-size) * -.5);
+		margin-right: calc(var(--robroy-full-screen-size) * -0.5);
+		margin-top: calc(var(--robroy-full-screen-size) * -0.5);
 		mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0 0v20h10V10h10V0H0zM30 0v10h10v10h10V0H30zM0 50h20V40H10V30H0v10zM50 50H30V40h10V30h10v10z"/></svg>');
 		mask-repeat: no-repeat;
 		position: absolute;
@@ -207,7 +207,7 @@
 }
 
 .robroy__button--nav {
-	margin-top: calc(var(--robroy-icon-size) * -.5);
+	margin-top: calc(var(--robroy-icon-size) * -0.5);
 	position: fixed;
 	top: 50%;
 
@@ -216,9 +216,9 @@
 		border-width: var(--robroy-arrow-size);
 		content: '';
 		display: flex;
-		left: calc((var(--robroy-icon-size) - (var(--robroy-arrow-size) * 2)) * .5);
+		left: calc((var(--robroy-icon-size) - (var(--robroy-arrow-size) * 2)) * 0.5);
 		position: absolute;
-		top: calc((var(--robroy-icon-size) - (var(--robroy-arrow-size) * 2)) * .5);
+		top: calc((var(--robroy-icon-size) - (var(--robroy-arrow-size) * 2)) * 0.5);
 	}
 }
 
@@ -227,7 +227,7 @@
 
 	&::after {
 		border-color: transparent var(--robroy-arrow-color) transparent transparent;
-		margin-left: calc(var(--robroy-arrow-size) * -.5);
+		margin-left: calc(var(--robroy-arrow-size) * -0.5);
 	}
 }
 
@@ -236,7 +236,7 @@
 
 	&::after {
 		border-color: transparent transparent transparent var(--robroy-arrow-color);
-		margin-left: calc(var(--robroy-arrow-size) * .5);
+		margin-left: calc(var(--robroy-arrow-size) * 0.5);
 	}
 }
 
@@ -250,8 +250,8 @@
 		content: '';
 		display: block;
 		height: var(--robroy-loading-size);
-		margin-right: calc(var(--robroy-loading-size) * -.5);
-		margin-top: calc(var(--robroy-loading-size) * -.5);
+		margin-right: calc(var(--robroy-loading-size) * -0.5);
+		margin-top: calc(var(--robroy-loading-size) * -0.5);
 		position: absolute;
 		right: 50%;
 		top: 50%;
