@@ -17,7 +17,7 @@ const Robroy = {
 		args.disableResizeListener = args.disableResizeListener || false;
 		args.resizeDebounceMilliseconds = args.resizeDebounceMilliseconds || 100;
 		args.minScreenWidth = args.minScreenWidth || 400;
-		args.disableImageClickListener = args.disableImageClickListener || false;
+		args.enableImageClickListener = args.enableImageClickListener || false;
 		args.imageClickListenerThreshold = args.imageClickListenerThreshold || 0.5;
 		args.disableOverlayClickListener = args.disableOverlayClickListener || false;
 		args.hideCloseButton = args.hideCloseButton || false;
@@ -200,7 +200,7 @@ const Robroy = {
 
 		const $img = document.createElement('img');
 		$img.setAttribute('class', 'robroy__img');
-		if (!Robroy.args.disableImageClickListener) {
+		if (Robroy.args.enableImageClickListener) {
 			$img.addEventListener('click', Robroy.onClickImage);
 		}
 		$figure.appendChild($img);
