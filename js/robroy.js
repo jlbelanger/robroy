@@ -278,7 +278,7 @@ const Robroy = {
 		}
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
-		Robroy.setImage($thumbnail);
+		Robroy.setImage($thumbnail, 'next');
 	},
 	previous: () => {
 		let i = Robroy.currentIndex - 1;
@@ -293,7 +293,7 @@ const Robroy = {
 		}
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
-		Robroy.setImage($thumbnail);
+		Robroy.setImage($thumbnail, 'previous');
 	},
 	fullScreen: () => {
 		if (document.fullscreenElement) {
@@ -326,7 +326,7 @@ const Robroy = {
 
 		return '';
 	},
-	setImage: ($thumbnail) => {
+	setImage: ($thumbnail, $click = null) => {
 		// Show loading icon.
 		const $container = document.getElementById(Robroy.args.id);
 		$container.classList.add('robroy--loading');
@@ -404,6 +404,28 @@ const Robroy = {
 					// Remove loading icon.
 					$container.classList.remove('robroy--loading');
 					$figure.classList.remove('robroy__figure--loading');
+				}
+				// Keep focus on prev / next button after click
+				if (!Robroy.args.hideNavButtons && !Robroy.args.enableLoop) {
+					switch ($click) {
+						case 'next':
+							if ($container.querySelector('.robroy__button--next').classList.contains('robroy-hide')) {
+								$container.querySelector('.robroy__button--close').focus();
+							} else {
+								$container.querySelector('.robroy__button--next').focus();
+							}
+							break;
+						case 'previous':
+							if ($container.querySelector('.robroy__button--prev').classList.contains('robroy-hide')) {
+								$container.querySelector('.robroy__button--close').focus();
+							} else {
+								$container.querySelector('.robroy__button--prev').focus();
+							}
+							break;
+						default:
+							// Close button by defaut on load
+							$container.querySelector('.robroy__button--close').focus();
+					}
 				}
 			}, Robroy.args.imgLoadIntervalMilliseconds);
 		}
