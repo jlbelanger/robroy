@@ -34,6 +34,7 @@ const Robroy = {
 		Robroy.args = args;
 
 		const lang = args.lang || {};
+		lang.dialogName = lang.dialogName || 'Lightbox gallery';
 		lang.closeImage = lang.closeImage || 'Close Image';
 		lang.fullScreen = lang.fullScreen || 'Full Screen';
 		lang.previousImage = lang.previousImage || 'Previous Image';
@@ -154,6 +155,7 @@ const Robroy = {
 		const $container = document.createElement('dialog');
 		$container.setAttribute('class', `robroy ${Robroy.args.animateInClass}`.trim());
 		$container.setAttribute('id', Robroy.args.id);
+		$container.setAttribute('aria-label', Robroy.lang.dialogName);
 		document.body.appendChild($container);
 
 		const $figure = document.createElement('figure');
