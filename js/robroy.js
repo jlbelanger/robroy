@@ -382,9 +382,11 @@ const Robroy = {
 		if (caption) {
 			$figcaption.classList.remove('robroy-hide');
 			$figcaption.innerHTML = caption;
+			$img.setAttribute('alt', caption);
 		} else {
 			$figcaption.classList.add('robroy-hide');
 			$figcaption.innerText = '';
+			$img.setAttribute('alt', '');
 		}
 
 		const $figure = $container.querySelector('.robroy__figure');
