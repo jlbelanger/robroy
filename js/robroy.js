@@ -228,9 +228,9 @@ const Robroy = {
 
 		Robroy.setImage($thumbnail);
 
-		// Trap focus inside the lightbox.
 		$container.showModal();
-		$container.focus();
+		// Trap focus inside the lightbox.
+		Robroy.keepFocus($container);
 
 		// Animate in.
 		if (Robroy.args.animateInClass) {
@@ -488,6 +488,29 @@ const Robroy = {
 		}
 	},
 	getMargin: () => Math.round(window.innerHeight * 0.1),
+	keepFocus: ($context) => {
+		const robroyButtons = $context.querySelectorAll('button');
+		const firstButton = robroyButtons[0];
+		const lastButton = robroyButtons[robroyButtons.length - 1];
+		const keyListener = (event) => {
+			const $keycode = event.which || event.keyCode;
+			event.preventDefault = event.preventDefault || function () {
+				event.returnValue = false;
+			};
+			if ($keycode === 9) { // Tab
+				if (event.target === lastButton && !event.shiftKey) {
+					event.preventDefault();
+					firstButton.focus();
+				} else if (event.target === firstButton && event.shiftKey) {
+					event.preventDefault();
+					lastButton.focus();
+				}
+			}
+		};
+		if (firstButton && lastButton) {
+			$context.addEventListener('keydown', keyListener, false);
+		}
+	},
 };
 
 export default Robroy;
