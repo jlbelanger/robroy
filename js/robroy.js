@@ -493,39 +493,29 @@ const Robroy = {
 	},
 	getMargin: () => Math.round(window.innerHeight * 0.1),
 	keepFocus: ($context) => {
-		const robroyButtons = $context.querySelectorAll('button');
-		let firstButton;
-		for (let i = 0; i < robroyButtons.length; i += 1) {
-			if (robroyButtons[i].checkVisibility()) {
-				firstButton = robroyButtons[i];
-				break;
-			}
-		}
-		let lastButton;
-		for (let j = robroyButtons.length - 1; j >= 0; j -= 1) {
-			if (robroyButtons[j].checkVisibility()) {
-				lastButton = robroyButtons[j];
-				break;
-			}
-		}
+		const $closeButton = $context.querySelector('button.robroy__button.robroy__button--close'); // 1st
+		const $prevButton = $context.querySelector('button.robroy__button.robroy__button--prev'); // 2nd
+		const $nextButton = $context.querySelector('button.robroy__button.robroy__button--next'); // Last
 		const keyListener = (event) => {
 			const $keycode = event.which || event.keyCode;
 			event.preventDefault = event.preventDefault || function () {
 				event.returnValue = false;
 			};
 			if ($keycode === 9) { // Tab
+				let lastButton = $nextButton;
+				if (!$nextButton.checkVisibility()) {
+					lastButton = $prevButton;
+				}
 				if (event.target === lastButton && !event.shiftKey) {
 					event.preventDefault();
-					firstButton.focus();
-				} else if (event.target === firstButton && event.shiftKey) {
+					$closeButton.focus();
+				} else if (event.target === $closeButton && event.shiftKey) {
 					event.preventDefault();
 					lastButton.focus();
 				}
 			}
 		};
-		if (firstButton && lastButton) {
-			$context.addEventListener('keydown', keyListener, false);
-		}
+		$context.addEventListener('keydown', keyListener, false);
 	},
 };
 
