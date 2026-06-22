@@ -494,8 +494,20 @@ const Robroy = {
 	getMargin: () => Math.round(window.innerHeight * 0.1),
 	keepFocus: ($context) => {
 		const robroyButtons = $context.querySelectorAll('button');
-		const firstButton = robroyButtons[0];
-		const lastButton = robroyButtons[robroyButtons.length - 1];
+		let firstButton;
+		for (let i = 0; i < robroyButtons.length; i += 1) {
+			if (robroyButtons[i].checkVisibility()) {
+				firstButton = robroyButtons[i];
+				break;
+			}
+		}
+		let lastButton;
+		for (let j = robroyButtons.length - 1; j >= 0; j -= 1) {
+			if (robroyButtons[j].checkVisibility()) {
+				lastButton = robroyButtons[j];
+				break;
+			}
+		}
 		const keyListener = (event) => {
 			const $keycode = event.which || event.keyCode;
 			event.preventDefault = event.preventDefault || function () {
