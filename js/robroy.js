@@ -232,7 +232,9 @@ const Robroy = {
 
 		$container.showModal();
 		// Trap focus inside the lightbox.
-		Robroy.keepFocus($container);
+		if (!Robroy.args.hideCloseButton && !Robroy.args.hideNavButtons) {
+			Robroy.keepFocus($container);
+		}
 
 		// Animate in.
 		if (Robroy.args.animateInClass) {
