@@ -178,7 +178,6 @@ const Robroy = {
 			$closeButton.setAttribute('title', Robroy.lang.closeImage);
 			$closeButton.setAttribute('type', 'button');
 			$closeButton.addEventListener('click', Robroy.close);
-			$closeButton.innerText = Robroy.lang.closeImage;
 			$figure.appendChild($closeButton);
 		}
 
@@ -188,14 +187,12 @@ const Robroy = {
 			$prevButton.setAttribute('title', Robroy.lang.previousImage);
 			$prevButton.setAttribute('type', 'button');
 			$prevButton.addEventListener('click', Robroy.previous);
-			$prevButton.innerText = Robroy.lang.previousImage;
 			$figure.appendChild($prevButton);
 
 			const $nextButton = document.createElement('button');
 			$nextButton.setAttribute('class', 'robroy__button robroy__button--nav robroy__button--next');
 			$nextButton.setAttribute('title', Robroy.lang.nextImage);
 			$nextButton.setAttribute('type', 'button');
-			$nextButton.innerText = Robroy.lang.nextImage;
 			$nextButton.addEventListener('click', Robroy.next);
 			$figure.appendChild($nextButton);
 		}
