@@ -17,7 +17,7 @@ const Robroy = {
 		args.disableResizeListener = args.disableResizeListener || false;
 		args.resizeDebounceMilliseconds = args.resizeDebounceMilliseconds || 100;
 		args.minScreenWidth = args.minScreenWidth || 400;
-		args.disableImageClickListener = args.disableImageClickListener || false;
+		args.enableImageClickListener = args.enableImageClickListener || false;
 		args.imageClickListenerThreshold = args.imageClickListenerThreshold || 0.5;
 		args.disableOverlayClickListener = args.disableOverlayClickListener || false;
 		args.hideCloseButton = args.hideCloseButton || false;
@@ -34,6 +34,7 @@ const Robroy = {
 		Robroy.args = args;
 
 		const lang = args.lang || {};
+		lang.dialogName = lang.dialogName || 'Lightbox gallery';
 		lang.closeImage = lang.closeImage || 'Close Image';
 		lang.fullScreen = lang.fullScreen || 'Full Screen';
 		lang.previousImage = lang.previousImage || 'Previous Image';
@@ -154,6 +155,7 @@ const Robroy = {
 		const $container = document.createElement('dialog');
 		$container.setAttribute('class', `robroy ${Robroy.args.animateInClass}`.trim());
 		$container.setAttribute('id', Robroy.args.id);
+		$container.setAttribute('aria-label', Robroy.lang.dialogName);
 		document.body.appendChild($container);
 
 		const $figure = document.createElement('figure');
@@ -176,7 +178,6 @@ const Robroy = {
 			$closeButton.setAttribute('title', Robroy.lang.closeImage);
 			$closeButton.setAttribute('type', 'button');
 			$closeButton.addEventListener('click', Robroy.close);
-			$closeButton.innerText = Robroy.lang.closeImage;
 			$figure.appendChild($closeButton);
 		}
 
@@ -186,21 +187,19 @@ const Robroy = {
 			$prevButton.setAttribute('title', Robroy.lang.previousImage);
 			$prevButton.setAttribute('type', 'button');
 			$prevButton.addEventListener('click', Robroy.previous);
-			$prevButton.innerText = Robroy.lang.previousImage;
 			$figure.appendChild($prevButton);
 
 			const $nextButton = document.createElement('button');
 			$nextButton.setAttribute('class', 'robroy__button robroy__button--nav robroy__button--next');
 			$nextButton.setAttribute('title', Robroy.lang.nextImage);
 			$nextButton.setAttribute('type', 'button');
-			$nextButton.innerText = Robroy.lang.nextImage;
 			$nextButton.addEventListener('click', Robroy.next);
 			$figure.appendChild($nextButton);
 		}
 
 		const $img = document.createElement('img');
 		$img.setAttribute('class', 'robroy__img');
-		if (!Robroy.args.disableImageClickListener) {
+		if (Robroy.args.enableImageClickListener) {
 			$img.addEventListener('click', Robroy.onClickImage);
 		}
 		$figure.appendChild($img);
@@ -228,9 +227,11 @@ const Robroy = {
 
 		Robroy.setImage($thumbnail);
 
-		// Trap focus inside the lightbox.
 		$container.showModal();
-		$container.focus();
+		// Trap focus inside the lightbox.
+		if (!Robroy.args.hideCloseButton && !Robroy.args.hideNavButtons) {
+			Robroy.keepFocus($container);
+		}
 
 		// Animate in.
 		if (Robroy.args.animateInClass) {
@@ -278,7 +279,7 @@ const Robroy = {
 		}
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
-		Robroy.setImage($thumbnail);
+		Robroy.setImage($thumbnail, 'next');
 	},
 	previous: () => {
 		let i = Robroy.currentIndex - 1;
@@ -293,7 +294,7 @@ const Robroy = {
 		}
 
 		const $thumbnail = document.querySelector(`[data-robroy-index="${i}"]`);
-		Robroy.setImage($thumbnail);
+		Robroy.setImage($thumbnail, 'previous');
 	},
 	fullScreen: () => {
 		if (document.fullscreenElement) {
@@ -326,7 +327,7 @@ const Robroy = {
 
 		return '';
 	},
-	setImage: ($thumbnail) => {
+	setImage: ($thumbnail, $click = null) => {
 		// Show loading icon.
 		const $container = document.getElementById(Robroy.args.id);
 		$container.classList.add('robroy--loading');
@@ -380,9 +381,11 @@ const Robroy = {
 		if (caption) {
 			$figcaption.classList.remove('robroy-hide');
 			$figcaption.innerHTML = caption;
+			$img.setAttribute('alt', caption);
 		} else {
 			$figcaption.classList.add('robroy-hide');
 			$figcaption.innerText = '';
+			$img.setAttribute('alt', '');
 		}
 
 		const $figure = $container.querySelector('.robroy__figure');
@@ -404,6 +407,28 @@ const Robroy = {
 					// Remove loading icon.
 					$container.classList.remove('robroy--loading');
 					$figure.classList.remove('robroy__figure--loading');
+				}
+				// Keep focus on prev / next button after click
+				if (!Robroy.args.hideNavButtons && !Robroy.args.enableLoop) {
+					switch ($click) {
+						case 'next':
+							if ($container.querySelector('.robroy__button--next').classList.contains('robroy-hide')) {
+								$container.querySelector('.robroy__button--close').focus();
+							} else {
+								$container.querySelector('.robroy__button--next').focus();
+							}
+							break;
+						case 'previous':
+							if ($container.querySelector('.robroy__button--prev').classList.contains('robroy-hide')) {
+								$container.querySelector('.robroy__button--close').focus();
+							} else {
+								$container.querySelector('.robroy__button--prev').focus();
+							}
+							break;
+						default:
+							// Close button by defaut on load
+							$container.querySelector('.robroy__button--close').focus();
+					}
 				}
 			}, Robroy.args.imgLoadIntervalMilliseconds);
 		}
@@ -466,6 +491,31 @@ const Robroy = {
 		}
 	},
 	getMargin: () => Math.round(window.innerHeight * 0.1),
+	keepFocus: ($context) => {
+		const $closeButton = $context.querySelector('button.robroy__button.robroy__button--close'); // 1st
+		const $prevButton = $context.querySelector('button.robroy__button.robroy__button--prev'); // 2nd
+		const $nextButton = $context.querySelector('button.robroy__button.robroy__button--next'); // Last
+		const keyListener = (event) => {
+			const $keycode = event.which || event.keyCode;
+			event.preventDefault = event.preventDefault || function () {
+				event.returnValue = false;
+			};
+			if ($keycode === 9) { // Tab
+				let lastButton = $nextButton;
+				if (!$nextButton.checkVisibility()) {
+					lastButton = $prevButton;
+				}
+				if (event.target === lastButton && !event.shiftKey) {
+					event.preventDefault();
+					$closeButton.focus();
+				} else if (event.target === $closeButton && event.shiftKey) {
+					event.preventDefault();
+					lastButton.focus();
+				}
+			}
+		};
+		$context.addEventListener('keydown', keyListener, false);
+	},
 };
 
 export default Robroy;
